@@ -22,7 +22,7 @@ A IA está desligada por padrão. Se o aluno habilitar um endpoint compatível, 
 
 ### Diferencial
 
-Nossa unidade de valor não é apenas o alerta: é a explicação compreendida. Português completo, operação local e contribuição só em conteúdo tornam o produto acessível a alunos, professores e pessoas que não trabalham com segurança. O quiz transforma a correção em prática, e o progresso oferece continuidade.
+Nossa unidade de valor não é apenas o alerta: é a explicação compreendida. Português completo, operação local e contribuição só em conteúdo tornam o produto acessível a alunos, professores e pessoas que não trabalham com segurança. O quiz transforma a correção em prática, e o progresso oferece continuidade. O criador de lições valida YAML pelo mesmo schema do scanner e permite contribuir sem escrever um detector. O modo demonstração e a PWA mantêm a apresentação acessível mesmo sem rede.
 
 ### Impacto esperado e como medir
 

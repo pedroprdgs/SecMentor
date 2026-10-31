@@ -41,7 +41,9 @@ Cada lição contém resumo, analogia, exemplos, experimento inofensivo, erros c
 
 O progresso fica em `~/.secmentor/progresso.json`, com permissão restrita e gravação por renomeação. `SECMENTOR_HOME` muda a pasta. Arquivo corrompido não é sobrescrito: copie-o e restaure manualmente. Sessões simultâneas não são sincronizadas; evite dois quizzes CLI ao mesmo tempo.
 
-No playground, o progresso conta lições distintas e usa um nível a cada quatro lições. Ele não se sincroniza com a CLI. Limpar dados do navegador remove esse progresso. Sem armazenamento disponível, o estado dura só a sessão.
+No novo front end, cada acerto vale 20 pontos. Níveis: Iniciante até 79, Defensor a partir de 80 e Guardião a partir de 200. Revisão dos erros reúne lições em que houve resposta incorreta. A sequência usa dias locais; há conquistas por prática, correção segura, dez acertos seguidos e doze lições praticadas. O histórico guarda data, nomes de até vinte arquivos e contagens, nunca conteúdo.
+
+O progresso do navegador não se sincroniza com a CLI. Limpar dados em `/progresso` apaga apenas dados do SecMentor, incluindo as configurações de IA, após confirmação. Com armazenamento indisponível, a sessão continua em memória.
 
 ## Correção assistida
 

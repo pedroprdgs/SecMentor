@@ -1,5 +1,13 @@
 # Changelog
 
+## Não lançado · evolução do front end
+
+- Playground evoluído para aplicação React 18 com rotas, CodeMirror 6 e análise em Worker.
+- Importação de arquivos, pastas e ZIP, filtros, diff e correção segura com desfazer.
+- Quiz por modo, progresso local, biblioteca, criador de lições YAML e configurações de IA com consentimento.
+- Relatórios, links comprimidos, tour, modo demonstração e PWA offline.
+- Testes de componentes, E2E, capturas reais e medições Lighthouse; CI e Pages atualizados.
+
 ## 0.1.0 — 2026-10-31
 
 - Monorepo pnpm, TypeScript strict, Node 20 e CI com lint, tipos, cobertura, lições e build.

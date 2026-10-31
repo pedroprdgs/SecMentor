@@ -8,7 +8,7 @@ Quase todo material de segurança de código está em inglês e é pensado para 
 
 **O objetivo é o próximo commit do aluno ser melhor — e ele entender por quê.**
 
-![Playground do SecMentor](docs/assets/demo.png)
+![Front end do SecMentor](docs/screenshots/inicio.png)
 
 ## Experimente em três comandos
 
@@ -21,9 +21,17 @@ pnpm secmentor scan examples/
 ```
 
 O último comando termina com **código 1**, pois os exemplos são vulneráveis de propósito. Não os publique.
-Sem pnpm disponível, ative a versão do `packageManager` com Corepack. Se `corepack enable` exigir permissão, use uma instalação de Node gerenciada pelo usuário.
+Sem permissão para escrever em `/usr/local/bin`, não use sudo: `corepack pnpm dev` inicia o front end já instalado, pois o script não depende de um bin global. Para habilitar todos os comandos pnpm na sua conta:
 
-Abra o laboratório com `pnpm dev`, normalmente em **http://127.0.0.1:5173**. A CLI compilada também funciona com `node packages/cli/dist/index.js`.
+```sh
+mkdir -p "$HOME/.local/bin"
+corepack enable --install-directory "$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+Depois, execute `pnpm install --frozen-lockfile` e `pnpm build`. A configuração do PATH vale para este Terminal; adicione-a ao seu perfil se quiser persistir.
+
+Abra o front end com `pnpm dev`, normalmente em **http://127.0.0.1:5173**. Para apresentar, use **http://127.0.0.1:5173/demo**. A CLI compilada também funciona com `node packages/cli/dist/index.js`.
 
 ## Um achado vira uma lição
 
@@ -48,14 +56,14 @@ pnpm secmentor --lessons ./minhas-licoes explain SM001
 
 ## O que já existe
 
-| Superfície  | Comportamento                                                                                             |
-| ----------- | --------------------------------------------------------------------------------------------------------- |
-| Core        | 12 regras, AST Babel para JS/TS/JSX, configuração por regex, posições, filtros, avisos e 12 lições Zod    |
-| CLI         | Scan, explain, quiz, fix, rules, lint-lessons e init; terminal, JSON e SARIF 2.1.0                        |
-| Playground  | Editor, exemplos, filtros, marcação de linhas, lições, antes/depois, quiz, progresso e temas claro/escuro |
-| VS Code     | Diagnósticos, painel lateral, ações rápidas e contagem na barra de status                                 |
-| GitHub      | Action composta, resumo didático, comentário de PR elegível, upload SARIF e workflow Pages                |
-| IA opcional | Aprofunda lições, responde dúvidas e gera quiz. Desligada por padrão, com fallback local                  |
+| Superfície  | Comportamento                                                                                                      |
+| ----------- | ------------------------------------------------------------------------------------------------------------------ |
+| Core        | 12 regras, AST Babel para JS/TS/JSX, configuração por regex, posições, filtros, avisos e 12 lições Zod             |
+| CLI         | Scan, explain, quiz, fix, rules, lint-lessons e init; terminal, JSON e SARIF 2.1.0                                 |
+| Front end   | React 18, rotas, CodeMirror 6, Web Worker, arquivos/pastas/ZIP, lições, diff, quiz, criador YAML, relatórios e PWA |
+| VS Code     | Diagnósticos, painel lateral, ações rápidas e contagem na barra de status                                          |
+| GitHub      | Action composta, resumo didático, comentário de PR elegível, upload SARIF e workflow Pages                         |
+| IA opcional | Aprofunda lições, responde dúvidas e gera quiz. Desligada por padrão, com fallback local                           |
 
 As 12 regras cobrem SQL injection, XSS, segredos, senhas fracas, exposição de `.env`, execução dinâmica, command injection, path traversal, CORS/cookies, JWT, dependências imprevisíveis e comparação de segredos.
 
@@ -63,9 +71,9 @@ As 12 regras cobrem SQL injection, XSS, segredos, senhas fracas, exposição de 
 
 ## Privacidade é o padrão
 
-O núcleo não tem cliente HTTP, telemetria ou backend. Scanner e extensão **não executam o código analisado**. O playground usa o mesmo core no navegador, com assets locais e sem fontes/CDNs externas. Depois de instalar e compilar, análise e lições não precisam de internet. Servir o build localmente permite usá-lo offline; não há service worker para garantir o cache de uma primeira visita remota.
+O núcleo não tem cliente HTTP, telemetria ou backend. Scanner e extensão **não executam o código analisado**. O playground usa o mesmo core no navegador, com assets locais e sem fontes/CDNs externas. Depois de instalar e compilar, análise e lições não precisam de internet. O build de produção tem manifest e service worker: após aparecer “Aplicativo pronto para uso offline”, as rotas e o Worker ficam disponíveis sem rede. No modo de desenvolvimento, o service worker não é registrado.
 
-Apenas `--ia` habilita acesso ao endpoint explicitamente configurado. O adaptador recebe a lição e, se informada, a dúvida do aluno: **não recebe o arquivo, o caminho nem o trecho detectado**. Não inclua segredos ou código privado em perguntas. Um endpoint remoto recebe esse conteúdo; use um endpoint local se quiser manter tudo na máquina.
+Na CLI, apenas `--ia` habilita acesso ao endpoint explicitamente configurado. No front end, o recurso é habilitado em Configurações e cada envio pede confirmação. O adaptador recebe a lição e, se informada, a dúvida do aluno: **não recebe o arquivo, o caminho nem o trecho detectado**. Não inclua segredos ou código privado em perguntas. Um endpoint remoto recebe esse conteúdo; use um endpoint local se quiser manter tudo na máquina.
 
 ```sh
 export SECMENTOR_LLM_BASE_URL=http://127.0.0.1:1234/v1
@@ -77,6 +85,42 @@ pnpm secmentor explain SM001 --ia --pergunta 'Por que parâmetros ajudam?'
 O contrato usa [`POST /chat/completions`](https://developers.openai.com/api/reference/resources/chat), por compatibilidade com endpoints existentes. O projeto não escolhe nem baixa modelos. Falha de rede, resposta inválida ou ausência de configuração retorna conteúdo das lições. A IA **nunca detecta falhas** e suas respostas devem ser revisadas.
 
 Progresso da CLI: `~/.secmentor/progresso.json`; do navegador: `localStorage`, sem sincronização. `SECMENTOR_HOME` permite uma pasta alternativa. Relatórios JSON/terminal ocultam trechos de SM003; outros trechos podem conter dados privados. SARIF não contém código, mas inclui caminhos e mensagens. Publicar relatórios continua sendo uma decisão do usuário. A Action envia o SARIF ao GitHub quando configurada.
+
+## Front end para a apresentação
+
+O pacote existente `packages/playground` foi evoluído, preservando a CLI e os detectores. A entrada leve `@secmentor/core/content` fornece lições e schema; o scanner roda em um **Web Worker**. Não há backend.
+
+- **/**: landing, mini demo pausável e contadores reais do core.
+- **/analisar**: CodeMirror 6, arquivos, pastas, ZIP, árvore, progresso, filtros e achados por arquivo.
+- **/licoes** e **/licoes/SM001**: biblioteca com busca, tema e severidade; lições com URL própria.
+- **/quiz**: cinco perguntas, por lição ou revisão de erros, alternativas embaralhadas e feedback imediato.
+- **/progresso**: pontos, níveis, conquistas, sequência de dias e histórico sem código. Exclusão dos dados com confirmação.
+- **/contribuir**: criador com validação pelo Zod do core, preview YAML, download e proposta pré-preenchida no GitHub.
+- **/configuracoes**: tema do sistema/claro/escuro, fonte do editor e tutor opcional. Credenciais ficam apenas no localStorage, sem criptografia.
+- **/demo**: percorre automaticamente analisar → entender → antes/depois → quiz, com pausa e controles manuais.
+
+O painel oferece conteúdo completo, diff sob demanda e correção segura de httpOnly com desfazer. A IA pede confirmação por envio, recebe somente a lição e a pergunta e nunca recebe automaticamente o editor. Explicações/quiz locais permanecem disponíveis se o endpoint falhar ou CORS impedir a chamada.
+
+Importação: até **1.500 entradas**, **1 MiB por arquivo**, **20 MiB de texto por projeto** e **10 MiB por ZIP comprimido**. ZIP64 e arquivos criptografados não são aceitos. Expansão é conferida pelo diretório central e por leitura limitada em blocos. Pastas ignoram node_modules, .git, dist e coverage. Sem metadados Git no navegador, `.env` importado gera alerta de revisão; use a CLI para confirmar rastreamento e ignore.
+
+JSON, SARIF e impressão com explicações ficam no fim da análise. “Criar link do trecho” comprime um arquivo pequeno no fragmento da URL, após aviso: qualquer pessoa com o link poderá ler o código. O código não é salvo no histórico nem enviado a um serviço para criar o link.
+
+```sh
+pnpm dev                         # Desenvolvimento
+pnpm build                       # Build de todo o monorepo
+pnpm preview                     # Servir produção, normalmente porta 4173
+pnpm test                        # Core, CLI, stores, utilitários e componentes
+pnpm --filter @secmentor/playground exec playwright install chromium
+pnpm test:e2e                    # Fluxos reais no build de produção
+```
+
+Sem pnpm global, a demo já instalada também inicia com:
+
+```sh
+node packages/playground/node_modules/vite/bin/vite.js packages/playground --host 127.0.0.1
+```
+
+[Capturas reais Playwright](docs/screenshots/README.md) · [Métricas e Lighthouse](docs/hackathon/METRICAS.md). Para Pages, o workflow usa `VITE_BASE_PATH=/<nome-do-repositorio>/`, manifest com escopo correspondente e `404.html` para recuperar rotas da SPA. Metadados por rota são atualizados no navegador; crawlers que não executam JavaScript recebem os metadados gerais da landing.
 
 ## Arquitetura
 
@@ -132,6 +176,6 @@ O workflow [Pages](.github/workflows/pages.yml) publica `packages/playground/dis
 
 Comece por uma das [oito tarefas para iniciantes](docs/good-first-issues.md). Também aceitamos contribuições só nas lições: explicar bem é parte do produto.
 
-Próximos passos: rastreamento de entrada com escopos, mais fixtures reais, teste automatizado no Extension Host, pacotes de idioma completos e estudo com alunos. Não afirmamos impacto educacional medido antes desse estudo.
+Próximos passos: rastreamento de entrada com escopos, validação em outros navegadores, teste automatizado no Extension Host, tradução en completa e estudo com alunos. Não afirmamos impacto educacional medido antes desse estudo.
 
 Licença [MIT](LICENSE). Material do hackathon: [comece aqui](docs/hackathon/README.md).

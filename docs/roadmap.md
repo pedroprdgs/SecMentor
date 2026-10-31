@@ -8,10 +8,10 @@
 
 - Resolver escopos e imports antes de ampliar rastreamento de entrada.
 - Fixtures com aliases, reatribuições, sanitização e bibliotecas reais.
-- Testes no Extension Host e CI visual de desktop/mobile.
+- Testes no Extension Host e ampliar E2E para Firefox e WebKit.
 - SARIF validado contra schema oficial na CI.
 - Suporte completo a `ignore` por arquivo e justificativas auditáveis de supressão.
-- Worker para evitar bloqueio do editor em arquivos grandes.
+- Análise incremental e projetos acima dos limites atuais do Worker.
 
 ## Depois · aprendizado e alcance
 
@@ -21,3 +21,7 @@
 - Pacotes npm, Marketplace e versão pública do playground após revisão de release.
 
 Nada nesta lista representa uma funcionalidade já pronta. Novas correções automáticas precisam de prova de preservação de comportamento e revisão de segurança.
+
+## Evolução do front end · implementada
+
+React 18 com rotas; CodeMirror 6 sob demanda; Worker tipado; entrada leve do core; importação de arquivos, pastas e ZIP com limites; lições, diff, correção/desfazer; quiz, pontos e revisão dos erros; criador YAML; relatórios; link comprimido com consentimento; tour; /demo; preferências; PWA offline e E2E em Chromium. Publicação no GitHub e revisão de acessibilidade com leitor de tela continuam pendentes.
