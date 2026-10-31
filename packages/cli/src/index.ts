@@ -77,8 +77,17 @@ async function interactive<T>(
   run: (ask: (q: string) => Promise<string>) => Promise<T>,
 ) {
   const readline = createInterface({ input: stdin, output: stdout });
+  const lines = readline[Symbol.asyncIterator]();
   try {
-    return await run((q) => readline.question(q));
+    return await run(async (q) => {
+      stdout.write(q);
+      const line = await lines.next();
+      if (line.done)
+        throw new Error(
+          'Entrada encerrada. Reinicie o comando para continuar.',
+        );
+      return line.value;
+    });
   } finally {
     readline.close();
   }

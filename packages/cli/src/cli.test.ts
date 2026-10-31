@@ -24,7 +24,7 @@ function run(args: string[], cwd = process.cwd()) {
     env: { ...process.env, NO_COLOR: '1' },
   });
 }
-// Wait for the prompt: piping all answers before readline asks can lose later lines.
+// Exercita respostas digitadas uma por vez, além do teste de entrada em lote.
 function interactive(
   args: string[],
   responses: string[],
@@ -128,6 +128,30 @@ describe('CLI ponta a ponta', () => {
     expect(
       JSON.parse(await readFile(join(home, 'progresso.json'), 'utf8')).answered,
     ).toBe(12);
+  });
+  it('quiz preserva respostas recebidas em lote e trata EOF sem stack trace', async () => {
+    const home = await directory();
+    const options = {
+      encoding: 'utf8' as const,
+      env: { ...process.env, SECMENTOR_HOME: home, NO_COLOR: '1' },
+      timeout: 5000,
+    };
+    const result = spawnSync(process.execPath, [cli, 'quiz'], {
+      ...options,
+      input: '1\n'.repeat(12),
+    });
+    expect(result.status).toBe(0);
+    expect(result.stdout).toContain('Pontuação:');
+    expect(
+      JSON.parse(await readFile(join(home, 'progresso.json'), 'utf8')).answered,
+    ).toBe(12);
+    const ended = spawnSync(process.execPath, [cli, 'quiz'], {
+      ...options,
+      input: '',
+    });
+    expect(ended.status).toBe(2);
+    expect(ended.stderr).toContain('Entrada encerrada');
+    expect(ended.stderr).not.toContain('at ');
   });
   it('fix pede confirmação, cancela e aplica somente o patch previsto', async () => {
     const path = await directory();
