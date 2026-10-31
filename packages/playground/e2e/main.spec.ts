@@ -113,6 +113,13 @@ test('PWA abre biblioteca e demo offline após primeira visita', async ({
   ).toBeVisible();
   await page.goto('/demo');
   await expect(page.getByText('1 achado(s)', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: /03.*Ver a correção/ }).click();
+  await expect(
+    page.getByRole('tabpanel', { name: 'Antes e depois' }),
+  ).toBeVisible();
+  await page.getByRole('button', { name: /04.*Praticar com quiz/ }).click();
+  await page.getByRole('button', { name: /Query parametrizada/ }).click();
+  await expect(page.getByText('Boa! Você entendeu.')).toBeVisible();
   await context.setOffline(false);
 });
 
