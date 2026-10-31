@@ -1,0 +1,41 @@
+{
+  "name": "@secmentor/vscode",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/extension.cjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "esbuild src/extension.ts --bundle --platform=node --format=cjs --external:vscode --outfile=dist/extension.cjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@secmentor/core": "workspace:*"
+  },
+  "displayName": "SecMentor",
+  "description": "Aprenda segurança de código em português, offline.",
+  "publisher": "secmentor",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "secmentor.explain",
+        "title": "SecMentor: Explicar achado"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "esbuild": "^0.25.3",
+    "@vscode/vsce": "^3.6.0"
+  }
+}

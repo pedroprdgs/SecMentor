@@ -1,0 +1,34 @@
+{
+  "name": "secmentor",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm --filter @secmentor/core build && pnpm --filter @secmentor/cli build && pnpm --filter @secmentor/vscode build && pnpm --filter @secmentor/playground build",
+    "dev": "pnpm --filter @secmentor/playground dev",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "secmentor": "tsx packages/cli/src/index.ts",
+    "lint-lessons": "tsx packages/cli/src/index.ts lint-lessons",
+    "benchmark": "tsx scripts/benchmark.ts"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3",
+    "tsx": "^4.19.3",
+    "vitest": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@types/node": "^20.17.0",
+    "eslint": "^9.25.0",
+    "@eslint/js": "^9.25.0",
+    "typescript-eslint": "^8.31.0",
+    "prettier": "^3.5.3",
+    "globals": "^16.0.0"
+  }
+}
