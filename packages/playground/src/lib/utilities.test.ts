@@ -9,6 +9,8 @@ import {
   MAX_FILE,
   readZip,
   droppedFiles,
+  readFiles,
+  MAX_FILES,
 } from '../features/analyzer/files.js';
 import {
   useProgress,
@@ -40,6 +42,21 @@ beforeEach(() => {
   useSettings.setState(defaults);
 });
 describe('analisador e entradas', () => {
+  it('recusa uma pasta excessiva antes de ler seu conteúdo', async () => {
+    const file = new File(['eval(input)'], 'a.ts');
+    const read = vi.spyOn(file, 'arrayBuffer');
+    await expect(readFiles(Array(MAX_FILES + 1).fill(file))).rejects.toThrow(
+      t.analyzer.limit,
+    );
+    expect(read).not.toHaveBeenCalled();
+  });
+  it('traduz erros de ZIP corrompido para português', async () => {
+    const bytes = new Uint8Array(46);
+    new DataView(bytes.buffer).setUint32(0, 0x02014b50, true);
+    await expect(readZip(new File([bytes], 'corrompido.zip'))).rejects.toThrow(
+      t.analyzer.zipUnsafe,
+    );
+  });
   it('detecta linguagem e mantém a pasta ao sobrescrever linguagem', () => {
     expect(detectLanguage('src/App.tsx')).toBe('tsx');
     expect(detectLanguage('.env.local')).toBe('env');

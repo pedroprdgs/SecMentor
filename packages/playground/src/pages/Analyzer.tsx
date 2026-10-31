@@ -18,6 +18,8 @@ import {
   readZip,
   droppedFiles,
   languagePath,
+  MAX_FILES,
+  validateProject,
   type Language,
 } from '../features/analyzer/files.js';
 import { examples, type Example } from '../lib/examples.js';
@@ -132,11 +134,16 @@ export default function Analyzer() {
     setImporting(true);
     setNotice('');
     try {
-      const sources: SourceFile[] = [];
-      for (const file of files)
-        if (file.name.toLowerCase().endsWith('.zip'))
-          sources.push(...(await readZip(file)));
-        else sources.push(...(await readFiles([file])));
+      if (files.length > MAX_FILES) throw new Error(t.analyzer.limit);
+      const sources: SourceFile[] = await readFiles(
+        files.filter((file) => !file.name.toLowerCase().endsWith('.zip')),
+      );
+      for (const file of files.filter((file) =>
+        file.name.toLowerCase().endsWith('.zip'),
+      )) {
+        sources.push(...(await readZip(file)));
+        validateProject(sources);
+      }
       if (!sources.length) setNotice(t.analyzer.importIgnored);
       else {
         state.merge(sources);

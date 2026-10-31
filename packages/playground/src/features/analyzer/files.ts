@@ -30,6 +30,7 @@ export function validateProject(files: SourceFile[]) {
   return files;
 }
 export async function readFiles(files: File[]): Promise<SourceFile[]> {
+  if (files.length > MAX_FILES) throw new Error(t.analyzer.limit);
   let total = 0;
   const result: SourceFile[] = [];
   for (const file of files) {
@@ -76,6 +77,15 @@ export function preflightZip(buffer: ArrayBuffer) {
   if (!count) throw new Error(t.analyzer.zipUnsafe);
 }
 export async function readZip(file: File): Promise<SourceFile[]> {
+  try {
+    return await extractZip(file);
+  } catch (error) {
+    if (error instanceof Error && error.message === t.analyzer.limit)
+      throw error;
+    throw new Error(t.analyzer.zipUnsafe);
+  }
+}
+async function extractZip(file: File): Promise<SourceFile[]> {
   if (file.size > 10 * MAX_FILE) throw new Error(t.analyzer.limit);
   const buffer = await file.arrayBuffer();
   preflightZip(buffer);
