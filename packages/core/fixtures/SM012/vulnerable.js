@@ -1,0 +1,1 @@
+if (token == expectedToken) allow();

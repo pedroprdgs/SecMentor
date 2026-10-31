@@ -1,0 +1,34 @@
+{
+  "id": "SM009",
+  "titulo": "CORS e cookies permissivos",
+  "severidade": "alta",
+  "resumo": "Permissões do navegador precisam de limites explícitos.",
+  "por_que_e_perigoso": "CORS é a lista de visitantes; cookies são crachás. Uma lista ampla e crachás sem proteção ampliam riscos. Navegadores bloqueiam * com credenciais, mas a configuração continua incoerente.",
+  "exemplo_vulneravel": "cors({ origin: \"*\", credentials: true });\nres.cookie(\"session\", value, { httpOnly: false, secure: false });",
+  "exemplo_corrigido": "cors({ origin: \"https://app.example.com\", credentials: true });\nres.cookie(\"session\", value, { httpOnly: true, secure: true, sameSite: \"lax\" });",
+  "como_explorar_inofensivo": "Em um servidor local com cookies fictícios, confira as flags no painel de armazenamento do navegador. Não use sessões reais.",
+  "erros_comuns_de_iniciante": [
+    "Confundir a ausência de aviso com prova de segurança.",
+    "Aplicar uma correção sem testar o comportamento e o contexto."
+  ],
+  "checklist_de_correcao": [
+    "Liste origens confiáveis",
+    "Ative httpOnly e secure em HTTPS",
+    "Defina sameSite e avalie proteção contra CSRF"
+  ],
+  "referencias": [
+    "https://cwe.mitre.org/data/definitions/614.html"
+  ],
+  "quiz": [
+    {
+      "pergunta": "O que httpOnly impede?",
+      "opcoes": [
+        "Leitura do cookie por JavaScript",
+        "Todo tipo de CSRF",
+        "Envio do cookie por HTTP"
+      ],
+      "resposta": 0,
+      "explicacao": "httpOnly restringe acesso via JavaScript; secure restringe o transporte a HTTPS."
+    }
+  ]
+}

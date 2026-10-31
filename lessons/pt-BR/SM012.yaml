@@ -1,0 +1,34 @@
+{
+  "id": "SM012",
+  "titulo": "Comparação de segredos por igualdade",
+  "severidade": "media",
+  "resumo": "Comparações comuns podem revelar diferenças de tempo.",
+  "por_que_e_perigoso": "É como um porteiro que demora mais ao conferir cada letra correta da senha. Tempo pode virar pista, embora exploração dependa do contexto.",
+  "exemplo_vulneravel": "if (token == expectedToken) allow();",
+  "exemplo_corrigido": "const a = Buffer.from(token);\nconst b = Buffer.from(expectedToken);\nif (a.length === b.length && crypto.timingSafeEqual(a, b)) allow();",
+  "como_explorar_inofensivo": "Use tokens fictícios e compare o caminho de execução. Não conclua que uma medida isolada prova exploração por tempo.",
+  "erros_comuns_de_iniciante": [
+    "Confundir a ausência de aviso com prova de segurança.",
+    "Aplicar uma correção sem testar o comportamento e o contexto."
+  ],
+  "checklist_de_correcao": [
+    "Use comparação em tempo constante",
+    "Trate comprimentos diferentes",
+    "Prefira autenticação de bibliotecas mantidas"
+  ],
+  "referencias": [
+    "https://cwe.mitre.org/data/definitions/208.html"
+  ],
+  "quiz": [
+    {
+      "pergunta": "Qual função compara bytes em tempo constante?",
+      "opcoes": [
+        "crypto.timingSafeEqual",
+        "==",
+        "startsWith"
+      ],
+      "resposta": 0,
+      "explicacao": "timingSafeEqual compara buffers de mesmo tamanho; trate o tamanho antes da chamada."
+    }
+  ]
+}

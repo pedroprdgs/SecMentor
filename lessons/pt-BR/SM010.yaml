@@ -1,0 +1,34 @@
+{
+  "id": "SM010",
+  "titulo": "JWT sem verificação robusta",
+  "severidade": "alta",
+  "resumo": "Ler um token não é verificar sua autenticidade.",
+  "por_que_e_perigoso": "decode é como ler um crachá sem conferir a assinatura. É preciso verificar assinatura, algoritmo e prazo.",
+  "exemplo_vulneravel": "const user = jwt.decode(token);",
+  "exemplo_corrigido": "const user = jwt.verify(token, process.env.JWT_SECRET, { algorithms: [\"HS256\"], maxAge: \"15m\" });",
+  "como_explorar_inofensivo": "Crie um token fictício local e apenas decodifique o payload. Note que decodificar não prova quem o criou. Nunca use tokens reais.",
+  "erros_comuns_de_iniciante": [
+    "Confundir a ausência de aviso com prova de segurança.",
+    "Aplicar uma correção sem testar o comportamento e o contexto."
+  ],
+  "checklist_de_correcao": [
+    "Use verify com algoritmos explícitos",
+    "Exija exp ou maxAge conforme a biblioteca",
+    "Use segredo aleatório forte e valide emissor e público"
+  ],
+  "referencias": [
+    "https://cwe.mitre.org/data/definitions/347.html"
+  ],
+  "quiz": [
+    {
+      "pergunta": "jwt.decode comprova assinatura?",
+      "opcoes": [
+        "Não",
+        "Sim",
+        "Somente com HTTPS"
+      ],
+      "resposta": 0,
+      "explicacao": "decode lê dados; verify é responsável por verificar assinatura e restrições."
+    }
+  ]
+}

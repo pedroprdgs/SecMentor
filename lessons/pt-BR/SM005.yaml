@@ -1,0 +1,34 @@
+{
+  "id": "SM005",
+  "titulo": "Arquivo .env exposto",
+  "severidade": "alta",
+  "resumo": "O arquivo de ambiente deve ficar fora do Git.",
+  "por_que_e_perigoso": "O .env é uma gaveta de chaves. Um repositório pode copiar a gaveta inteira para outras máquinas.",
+  "exemplo_vulneravel": "SERVICE_API_KEY=chave_ficticia_local",
+  "exemplo_corrigido": "# .gitignore\n.env\n.env.*\n!.env.example",
+  "como_explorar_inofensivo": "Crie um .env só com valores fictícios em uma pasta temporária. Execute git check-ignore .env e git ls-files .env para verificar proteção e rastreamento.",
+  "erros_comuns_de_iniciante": [
+    "Confundir a ausência de aviso com prova de segurança.",
+    "Aplicar uma correção sem testar o comportamento e o contexto."
+  ],
+  "checklist_de_correcao": [
+    "Inclua .env e variantes no .gitignore",
+    "Remova arquivos já rastreados com git rm --cached",
+    "Revogue qualquer segredo já publicado"
+  ],
+  "referencias": [
+    "https://cwe.mitre.org/data/definitions/200.html"
+  ],
+  "quiz": [
+    {
+      "pergunta": "Adicionar .env ao .gitignore remove seu histórico?",
+      "opcoes": [
+        "Não, é preciso remover o rastreamento e revisar o histórico",
+        "Sim, imediatamente",
+        "Somente após reiniciar"
+      ],
+      "resposta": 0,
+      "explicacao": "O ignore não muda arquivos já rastreados nem apaga o histórico."
+    }
+  ]
+}
