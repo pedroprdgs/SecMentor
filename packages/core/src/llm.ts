@@ -31,7 +31,9 @@ export class OpenAICompatibleProvider implements LLMProvider {
     this.endpoint = config.baseUrl.replace(/\/$/, '') + '/chat/completions';
   }
   private async complete(lesson: Lesson, task: string): Promise<string> {
-    const response = await this.request(this.endpoint, {
+    // fetch do navegador não aceita a instância do provider como receptor.
+    const request = this.request;
+    const response = await request(this.endpoint, {
       method: 'POST',
       redirect: 'error',
       signal: AbortSignal.timeout(8000),

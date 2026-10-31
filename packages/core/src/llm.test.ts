@@ -62,6 +62,7 @@ describe('IA opcional sem participação na detecção', () => {
       provider,
     );
     expect(output.source).toBe('ia');
+    expect(request.mock.contexts[0]).toBeUndefined();
     const [url, init] = request.mock.calls[0];
     expect(url).toBe('http://127.0.0.1:1234/v1/chat/completions');
     expect(init?.redirect).toBe('error');
