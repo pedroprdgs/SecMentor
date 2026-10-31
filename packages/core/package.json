@@ -19,6 +19,7 @@
   "exports": {
     ".": "./dist/index.js",
     "./node": "./dist/node.js",
-    "./llm": "./dist/llm.js"
+    "./llm": "./dist/llm.js",
+    "./content": "./dist/content.js"
   }
 }
