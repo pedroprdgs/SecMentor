@@ -30,6 +30,7 @@ export default function LessonPanel({
   onApplied,
   tab: controlledTab,
   onTabChange,
+  headingLevel = 2,
 }: {
   id: string;
   finding?: Finding;
@@ -37,6 +38,7 @@ export default function LessonPanel({
   onUndo?: () => void;
   tab?: LessonTab;
   onTabChange?: (value: LessonTab) => void;
+  headingLevel?: 1 | 2;
 }) {
   const lesson = lessonFor(id);
   const [internalTab, setInternalTab] = useState<LessonTab>('understand');
@@ -54,6 +56,7 @@ export default function LessonPanel({
   const [extra, setExtra] = useState<NonNullable<typeof lesson>['quiz']>();
   const ai = useSettings((s) => s.ai);
   const reduced = useReducedMotion();
+  const Heading = headingLevel === 1 ? 'h1' : 'h2';
   if (!lesson) return <Empty title={t.lesson.unknown} />;
   async function copy() {
     try {
@@ -128,7 +131,7 @@ export default function LessonPanel({
             <span className="eyebrow">
               {t.lesson.kicker} · {lesson.id}
             </span>
-            <h2>{lesson.titulo}</h2>
+            <Heading>{lesson.titulo}</Heading>
           </div>
           <SeverityBadge value={lesson.severidade} />
         </div>

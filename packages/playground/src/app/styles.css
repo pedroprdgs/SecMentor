@@ -1304,7 +1304,7 @@ progress {
   border-radius: 8px;
   display: flex;
 }
-.lesson-heading h2 {
+.lesson-heading :is(h1, h2) {
   font-size: 19px;
   margin: 4px 0 0;
 }
@@ -1490,7 +1490,7 @@ summary {
     flex-wrap: wrap;
     gap: 9px;
   }
-  .lesson-heading h2 {
+  .lesson-heading :is(h1, h2) {
     font-size: 17px;
   }
   .lesson-heading > .severity-badge {

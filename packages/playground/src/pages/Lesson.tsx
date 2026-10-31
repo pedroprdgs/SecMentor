@@ -26,7 +26,7 @@ export default function Lesson() {
         {t.nav.lessons}
       </Link>
       {lesson ? (
-        <LessonPanel key={id} id={id} />
+        <LessonPanel key={id} id={id} headingLevel={1} />
       ) : (
         <Empty title={t.lesson.unknown}>
           <Link to="/licoes">{t.lesson.choose}</Link>
