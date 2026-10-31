@@ -1,0 +1,1 @@
+{"name":"secmentor-unsafe-express-example","private":true,"type":"module","scripts":{"start":"node app.js"},"dependencies":{"express":"4.21.2","cors":"2.8.5","jsonwebtoken":"9.0.2"},"devDependencies":{"pacote-ficticio-nao-instalar":"latest"}}

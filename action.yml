@@ -1,0 +1,84 @@
+name: SecMentor
+description: Segurança que ensina em português. Scan local, resumo didático e SARIF.
+author: SecMentor contributors
+branding:
+  icon: shield
+  color: green
+inputs:
+  path:
+    description: Caminho relativo ao workspace para analisar
+    default: '.'
+  minimum-severity:
+    description: baixa, media, alta ou critica
+    default: media
+  upload-sarif:
+    description: Enviar SARIF ao code scanning (requer security-events write)
+    default: 'true'
+  comment:
+    description: Comentar em PRs do próprio repositório (requer pull-requests write)
+    default: 'true'
+outputs:
+  sarif:
+    description: Caminho do relatório SARIF
+    value: ${{ steps.scan.outputs.sarif }}
+  exit-code:
+    description: 0 sem achados, 1 com achados, 2 análise incompleta
+    value: ${{ steps.scan.outputs.exit-code }}
+runs:
+  using: composite
+  steps:
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 9.15.9
+        standalone: true
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Preparar scanner
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: |
+        pnpm install --frozen-lockfile --ignore-scripts
+        pnpm --filter @secmentor/core build
+        pnpm --filter @secmentor/cli build
+    - name: Analisar sem executar código do projeto
+      id: scan
+      shell: bash
+      env:
+        ACTION_DIR: ${{ github.action_path }}
+        SCAN_PATH: ${{ inputs.path }}
+        MINIMUM: ${{ inputs.minimum-severity }}
+      run: |
+        report="$RUNNER_TEMP/secmentor.sarif"
+        set +e
+        node "$ACTION_DIR/packages/cli/dist/index.js" scan "$SCAN_PATH" --sarif --severidade-minima "$MINIMUM" > "$report"
+        code=$?
+        set -e
+        echo "sarif=$report" >> "$GITHUB_OUTPUT"
+        echo "exit-code=$code" >> "$GITHUB_OUTPUT"
+        if [ ! -s "$report" ]; then
+          echo 'Falha no scan: relatório ausente.' >&2
+          exit 2
+        fi
+    - name: Resumo e comentário didático
+      uses: actions/github-script@v7
+      env:
+        ACTION_DIR: ${{ github.action_path }}
+        SARIF_PATH: ${{ steps.scan.outputs.sarif }}
+        COMMENT: ${{ inputs.comment }}
+      with:
+        script: |
+          const run = require(process.env.ACTION_DIR + '/scripts/action-summary.cjs');
+          await run({ github, context, core });
+    - name: Enviar SARIF
+      if: inputs.upload-sarif == 'true'
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: ${{ steps.scan.outputs.sarif }}
+        category: secmentor
+    - name: Informar análise incompleta
+      if: steps.scan.outputs.exit-code == '2'
+      shell: bash
+      run: |
+        echo 'SecMentor não conseguiu analisar todos os arquivos. Confira os avisos.' >&2
+        exit 2
