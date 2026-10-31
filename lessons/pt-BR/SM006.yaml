@@ -1,34 +1,29 @@
-{
-  "id": "SM006",
-  "titulo": "Execução dinâmica de código",
-  "severidade": "alta",
-  "resumo": "Uma string não deve virar um programa.",
-  "por_que_e_perigoso": "eval é como ler um bilhete e obedecer a qualquer ordem escrita nele, em vez de apenas entender seus dados.",
-  "exemplo_vulneravel": "eval(req.body.expression);",
-  "exemplo_corrigido": "const data = JSON.parse(req.body.json);",
-  "como_explorar_inofensivo": "Apenas leia o exemplo ou use eval(\"2 + 2\") em um ambiente local descartável. Note que o texto vira instrução. Não execute entradas de outras pessoas.",
-  "erros_comuns_de_iniciante": [
-    "Confundir a ausência de aviso com prova de segurança.",
-    "Aplicar uma correção sem testar o comportamento e o contexto."
-  ],
-  "checklist_de_correcao": [
-    "Troque eval por operações explícitas",
-    "Use JSON.parse para dados JSON",
-    "Passe funções para setTimeout"
-  ],
-  "referencias": [
-    "https://cwe.mitre.org/data/definitions/95.html"
-  ],
-  "quiz": [
-    {
-      "pergunta": "Como agendar uma função?",
-      "opcoes": [
-        "setTimeout(() => tarefa(), 1000)",
-        "setTimeout(\"tarefa()\", 1000)",
-        "eval(\"tarefa()\")"
-      ],
-      "resposta": 0,
-      "explicacao": "Uma função dispensa interpretar uma string como código."
-    }
-  ]
-}
+id: SM006
+titulo: Execução dinâmica de código
+severidade: alta
+resumo: Uma string não deve virar um programa.
+por_que_e_perigoso:
+  eval é como ler um bilhete e obedecer a qualquer ordem escrita nele, em vez de
+  apenas entender seus dados.
+exemplo_vulneravel: eval(req.body.expression);
+exemplo_corrigido: const data = JSON.parse(req.body.json);
+como_explorar_inofensivo:
+  Apenas leia o exemplo ou use eval("2 + 2") em um ambiente local
+  descartável. Note que o texto vira instrução. Não execute entradas de outras pessoas.
+erros_comuns_de_iniciante:
+  - Confundir a ausência de aviso com prova de segurança.
+  - Aplicar uma correção sem testar o comportamento e o contexto.
+checklist_de_correcao:
+  - Troque eval por operações explícitas
+  - Use JSON.parse para dados JSON
+  - Passe funções para setTimeout
+referencias:
+  - https://cwe.mitre.org/data/definitions/95.html
+quiz:
+  - pergunta: Como agendar uma função?
+    opcoes:
+      - setTimeout(() => tarefa(), 1000)
+      - setTimeout("tarefa()", 1000)
+      - eval("tarefa()")
+    resposta: 0
+    explicacao: Uma função dispensa interpretar uma string como código.

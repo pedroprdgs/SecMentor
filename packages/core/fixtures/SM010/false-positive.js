@@ -1,2 +1,1 @@
-// const user = jwt.decode(token);
-const mensagem = "conteúdo educativo";
+jwt.verify(token, key, { algorithms: ["RS256"], maxAge: "15m" });

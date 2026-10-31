@@ -61,7 +61,7 @@ Copie um YAML de `lessons/pt-BR` para uma pasta própria e mantenha o ID da regr
 
 `pnpm secmentor init --hook` cria um pre-commit se ainda não existir. O hook usa caminhos absolutos para o Node e a CLI compilada desta instalação, sem depender de um bin global. Rode o build antes de gerar o hook. Se mover a instalação ou remover o runtime, atualize o hook manualmente. Ele analisa a árvore de trabalho inteira, não apenas mudanças staged. Um hook existente é preservado.
 
-A extensão detecta 11 famílias de código em buffers JS/TS; regras de `.env` e manifesto dependem da CLI. O status mostra achados do arquivo ativo. F5 abre o ambiente de desenvolvimento. A ação rápida aplica somente `httpOnly`; use desfazer do editor se necessário.
+A extensão detecta 10 famílias de código em buffers JS/TS; regras de `.env` e manifesto dependem da CLI. O status mostra achados do arquivo ativo. F5 abre o ambiente de desenvolvimento. A ação rápida aplica somente `httpOnly`; use desfazer do editor se necessário.
 
 ## Problemas comuns
 

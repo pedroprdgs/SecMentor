@@ -1,34 +1,27 @@
-{
-  "id": "SM011",
-  "titulo": "Dependência sem versão previsível",
-  "severidade": "media",
-  "resumo": "* e latest deixam instalações menos previsíveis.",
-  "por_que_e_perigoso": "É como comprar um ingrediente sem dizer qual: o resultado pode mudar entre instalações.",
-  "exemplo_vulneravel": "{\"dependencies\":{\"exemplo\":\"*\"}}",
-  "exemplo_corrigido": "{\"dependencies\":{\"exemplo\":\"1.2.3\"}}",
-  "como_explorar_inofensivo": "Compare dois package.json fictícios. Observe qual especifica a versão. Não instale pacotes desconhecidos para a demonstração.",
-  "erros_comuns_de_iniciante": [
-    "Confundir a ausência de aviso com prova de segurança.",
-    "Aplicar uma correção sem testar o comportamento e o contexto."
-  ],
-  "checklist_de_correcao": [
-    "Escolha versões revisadas",
-    "Versione o lockfile",
-    "Use instalação com lockfile congelado na CI"
-  ],
-  "referencias": [
-    "https://cwe.mitre.org/data/definitions/1104.html"
-  ],
-  "quiz": [
-    {
-      "pergunta": "Qual prática torna a CI reproduzível?",
-      "opcoes": [
-        "Versões revisadas e lockfile congelado",
-        "Usar latest em tudo",
-        "Apagar o lockfile"
-      ],
-      "resposta": 0,
-      "explicacao": "O lockfile registra a resolução; a instalação congelada impede mudanças silenciosas."
-    }
-  ]
-}
+id: SM011
+titulo: Dependência sem versão previsível
+severidade: media
+resumo: '* e latest deixam instalações menos previsíveis.'
+por_que_e_perigoso: 'É como comprar um ingrediente sem dizer qual: o resultado pode mudar entre instalações.'
+exemplo_vulneravel: '{"dependencies":{"exemplo":"*"}}'
+exemplo_corrigido: '{"dependencies":{"exemplo":"1.2.3"}}'
+como_explorar_inofensivo:
+  Compare dois package.json fictícios. Observe qual especifica a versão. Não
+  instale pacotes desconhecidos para a demonstração.
+erros_comuns_de_iniciante:
+  - Confundir a ausência de aviso com prova de segurança.
+  - Aplicar uma correção sem testar o comportamento e o contexto.
+checklist_de_correcao:
+  - Escolha versões revisadas
+  - Versione o lockfile
+  - Use instalação com lockfile congelado na CI
+referencias:
+  - https://cwe.mitre.org/data/definitions/1104.html
+quiz:
+  - pergunta: Qual prática torna a CI reproduzível?
+    opcoes:
+      - Versões revisadas e lockfile congelado
+      - Usar latest em tudo
+      - Apagar o lockfile
+    resposta: 0
+    explicacao: O lockfile registra a resolução; a instalação congelada impede mudanças silenciosas.

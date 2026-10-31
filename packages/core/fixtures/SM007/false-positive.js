@@ -1,2 +1,1 @@
-// child_process.exec("echo " + req.query.name);
-const mensagem = "conteúdo educativo";
+child_process.execFile("echo", [req.query.name]);

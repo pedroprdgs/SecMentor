@@ -1,34 +1,29 @@
-{
-  "id": "SM004",
-  "titulo": "Senha sem proteção adequada",
-  "severidade": "alta",
-  "resumo": "Senhas precisam de hash próprio para senhas, com salt.",
-  "por_que_e_perigoso": "MD5 e SHA1 são rápidos demais: alguém pode testar muitos palpites. Um hash de senha deve tornar cada tentativa cara.",
-  "exemplo_vulneravel": "const hash = crypto.createHash(\"md5\").update(password).digest(\"hex\");",
-  "exemplo_corrigido": "const hash = await argon2.hash(password);",
-  "como_explorar_inofensivo": "Em dados fictícios, calcule MD5 da mesma palavra duas vezes. Os resultados iguais mostram a ausência de salt. Não tente quebrar senhas reais.",
-  "erros_comuns_de_iniciante": [
-    "Confundir a ausência de aviso com prova de segurança.",
-    "Aplicar uma correção sem testar o comportamento e o contexto."
-  ],
-  "checklist_de_correcao": [
-    "Use Argon2id ou scrypt com parâmetros atuais",
-    "Deixe a biblioteca gerar salt aleatório",
-    "Nunca armazene nem registre a senha original"
-  ],
-  "referencias": [
-    "https://cwe.mitre.org/data/definitions/916.html"
-  ],
-  "quiz": [
-    {
-      "pergunta": "Qual opção foi feita para guardar senhas?",
-      "opcoes": [
-        "Argon2id com salt",
-        "MD5 sem salt",
-        "Base64"
-      ],
-      "resposta": 0,
-      "explicacao": "Um algoritmo de senha torna tentativas mais caras e usa salt por credencial."
-    }
-  ]
-}
+id: SM004
+titulo: Senha sem proteção adequada
+severidade: alta
+resumo: Senhas precisam de hash próprio para senhas, com salt.
+por_que_e_perigoso:
+  'MD5 e SHA1 são rápidos demais: alguém pode testar muitos palpites. Um hash de
+  senha deve tornar cada tentativa cara.'
+exemplo_vulneravel: const hash = crypto.createHash("md5").update(password).digest("hex");
+exemplo_corrigido: const hash = await argon2.hash(password);
+como_explorar_inofensivo:
+  Em dados fictícios, calcule MD5 da mesma palavra duas vezes. Os resultados
+  iguais mostram a ausência de salt. Não tente quebrar senhas reais.
+erros_comuns_de_iniciante:
+  - Confundir a ausência de aviso com prova de segurança.
+  - Aplicar uma correção sem testar o comportamento e o contexto.
+checklist_de_correcao:
+  - Use Argon2id ou scrypt com parâmetros atuais
+  - Deixe a biblioteca gerar salt aleatório
+  - Nunca armazene nem registre a senha original
+referencias:
+  - https://cwe.mitre.org/data/definitions/916.html
+quiz:
+  - pergunta: Qual opção foi feita para guardar senhas?
+    opcoes:
+      - Argon2id com salt
+      - MD5 sem salt
+      - Base64
+    resposta: 0
+    explicacao: Um algoritmo de senha torna tentativas mais caras e usa salt por credencial.

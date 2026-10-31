@@ -1,2 +1,1 @@
-// if (token == expectedToken) allow();
-const mensagem = "conteúdo educativo";
+if (token == null) throw new Error("Ausente");

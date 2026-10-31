@@ -1,34 +1,29 @@
-{
-  "id": "SM002",
-  "titulo": "HTML sem proteção",
-  "severidade": "alta",
-  "resumo": "Texto vindo de fora pode virar código no navegador.",
-  "por_que_e_perigoso": "innerHTML é como entregar a chave da vitrine ao visitante: ele pode mudar o que será mostrado e executado.",
-  "exemplo_vulneravel": "element.innerHTML = req.query.message;",
-  "exemplo_corrigido": "element.textContent = req.query.message;",
-  "como_explorar_inofensivo": "Em uma página local descartável, use <b>teste</b> como entrada. Se aparecer em negrito, houve interpretação de HTML. Não use scripts nem envie links a terceiros.",
-  "erros_comuns_de_iniciante": [
-    "Confundir a ausência de aviso com prova de segurança.",
-    "Aplicar uma correção sem testar o comportamento e o contexto."
-  ],
-  "checklist_de_correcao": [
-    "Prefira textContent para texto",
-    "Se HTML for necessário use sanitizador mantido",
-    "No React prefira interpolação entre chaves"
-  ],
-  "referencias": [
-    "https://cwe.mitre.org/data/definitions/79.html"
-  ],
-  "quiz": [
-    {
-      "pergunta": "Como mostrar uma mensagem como texto?",
-      "opcoes": [
-        "textContent",
-        "innerHTML",
-        "document.write"
-      ],
-      "resposta": 0,
-      "explicacao": "textContent mostra os caracteres sem interpretá-los como HTML."
-    }
-  ]
-}
+id: SM002
+titulo: HTML sem proteção
+severidade: alta
+resumo: Texto vindo de fora pode virar código no navegador.
+por_que_e_perigoso:
+  'innerHTML é como entregar a chave da vitrine ao visitante: ele pode mudar o que
+  será mostrado e executado.'
+exemplo_vulneravel: element.innerHTML = req.query.message;
+exemplo_corrigido: element.textContent = req.query.message;
+como_explorar_inofensivo:
+  Em uma página local descartável, use <b>teste</b> como entrada. Se
+  aparecer em negrito, houve interpretação de HTML. Não use scripts nem envie links a terceiros.
+erros_comuns_de_iniciante:
+  - Confundir a ausência de aviso com prova de segurança.
+  - Aplicar uma correção sem testar o comportamento e o contexto.
+checklist_de_correcao:
+  - Prefira textContent para texto
+  - Se HTML for necessário use sanitizador mantido
+  - No React prefira interpolação entre chaves
+referencias:
+  - https://cwe.mitre.org/data/definitions/79.html
+quiz:
+  - pergunta: Como mostrar uma mensagem como texto?
+    opcoes:
+      - textContent
+      - innerHTML
+      - document.write
+    resposta: 0
+    explicacao: textContent mostra os caracteres sem interpretá-los como HTML.

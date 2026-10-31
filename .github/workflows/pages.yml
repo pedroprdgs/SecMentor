@@ -3,7 +3,14 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['packages/core/**', 'packages/playground/**', 'lessons/**', 'pnpm-lock.yaml', '.github/workflows/pages.yml']
+    paths:
+      [
+        'packages/core/**',
+        'packages/playground/**',
+        'lessons/**',
+        'pnpm-lock.yaml',
+        '.github/workflows/pages.yml',
+      ]
 permissions:
   contents: read
 concurrency:

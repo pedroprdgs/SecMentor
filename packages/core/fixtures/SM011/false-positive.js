@@ -1,2 +1,1 @@
-// {"dependencies":{"exemplo":"*"}}
-const mensagem = "conteúdo educativo";
+// Um package.json com versão explícita não deve alertar.

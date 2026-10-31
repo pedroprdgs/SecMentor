@@ -1,3 +1,2 @@
-// cors({ origin: "*", credentials: true });
-// res.cookie("session", value, { httpOnly: false, secure: false });
-const mensagem = "conteúdo educativo";
+cors({ origin: "*", credentials: false });
+res.cookie("prefs", value, { httpOnly: true, secure: true });

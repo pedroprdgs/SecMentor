@@ -1,34 +1,33 @@
-{
-  "id": "SM008",
-  "titulo": "Path traversal",
-  "severidade": "alta",
-  "resumo": "O nome pedido pelo usuário pode escapar da pasta permitida.",
-  "por_que_e_perigoso": "Um caminho com .. é como um endereço que manda sair do prédio antes de procurar a sala.",
-  "exemplo_vulneravel": "fs.readFile(req.query.path, callback);",
-  "exemplo_corrigido": "const base = path.resolve(\"./uploads\");\nconst target = path.resolve(base, String(req.query.path));\nconst relative = path.relative(base, target);\nif (relative.startsWith(\"..\") || path.isAbsolute(relative)) throw new Error(\"Caminho inválido\");\n// Verifique também links simbólicos antes de abrir.\nfs.readFile(target, callback);",
-  "como_explorar_inofensivo": "Em uma pasta temporária com arquivos fictícios, imprima path.resolve(base, \"../amostra.txt\"). Não abra arquivos do sistema.",
-  "erros_comuns_de_iniciante": [
-    "Confundir a ausência de aviso com prova de segurança.",
-    "Aplicar uma correção sem testar o comportamento e o contexto."
-  ],
-  "checklist_de_correcao": [
-    "Resolva o caminho absoluto",
-    "Confira contenção com path.relative",
-    "Trate links simbólicos e permissões"
-  ],
-  "referencias": [
-    "https://cwe.mitre.org/data/definitions/22.html"
-  ],
-  "quiz": [
-    {
-      "pergunta": "path.normalize sozinho garante contenção?",
-      "opcoes": [
-        "Não, também é preciso verificar a pasta permitida",
-        "Sim, sempre",
-        "Somente no Windows"
-      ],
-      "resposta": 0,
-      "explicacao": "Normalizar organiza o caminho, mas não impede sair da pasta base."
-    }
-  ]
-}
+id: SM008
+titulo: Path traversal
+severidade: alta
+resumo: O nome pedido pelo usuário pode escapar da pasta permitida.
+por_que_e_perigoso: Um caminho com .. é como um endereço que manda sair do prédio antes de procurar a sala.
+exemplo_vulneravel: fs.readFile(req.query.path, callback);
+exemplo_corrigido: |-
+  const base = path.resolve("./uploads");
+  const target = path.resolve(base, String(req.query.path));
+  const relative = path.relative(base, target);
+  if (relative.startsWith("..") || path.isAbsolute(relative)) throw new Error("Caminho inválido");
+  // Verifique também links simbólicos antes de abrir.
+  fs.readFile(target, callback);
+como_explorar_inofensivo:
+  Em uma pasta temporária com arquivos fictícios, imprima path.resolve(base,
+  "../amostra.txt"). Não abra arquivos do sistema.
+erros_comuns_de_iniciante:
+  - Confundir a ausência de aviso com prova de segurança.
+  - Aplicar uma correção sem testar o comportamento e o contexto.
+checklist_de_correcao:
+  - Resolva o caminho absoluto
+  - Confira contenção com path.relative
+  - Trate links simbólicos e permissões
+referencias:
+  - https://cwe.mitre.org/data/definitions/22.html
+quiz:
+  - pergunta: path.normalize sozinho garante contenção?
+    opcoes:
+      - Não, também é preciso verificar a pasta permitida
+      - Sim, sempre
+      - Somente no Windows
+    resposta: 0
+    explicacao: Normalizar organiza o caminho, mas não impede sair da pasta base.

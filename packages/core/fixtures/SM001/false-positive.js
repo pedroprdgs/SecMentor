@@ -1,2 +1,1 @@
-// db.query("SELECT * FROM users WHERE id = " + req.query.id);
-const mensagem = "conteúdo educativo";
+db.query("SELECT " + "* FROM users");

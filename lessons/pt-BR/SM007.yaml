@@ -1,34 +1,29 @@
-{
-  "id": "SM007",
-  "titulo": "Command injection",
-  "severidade": "critica",
-  "resumo": "Entrada externa não pode compor comandos de shell.",
-  "por_que_e_perigoso": "O shell entende separadores de comando. Colar entrada é como permitir novos itens em uma lista de ordens assinada por você.",
-  "exemplo_vulneravel": "child_process.exec(\"echo \" + req.query.name);",
-  "exemplo_corrigido": "child_process.execFile(\"echo\", [String(req.query.name)]);",
-  "como_explorar_inofensivo": "Sem executar o comando, imprima a string formada com a entrada \"amostra; echo teste\". Observe o segundo comando na string.",
-  "erros_comuns_de_iniciante": [
-    "Confundir a ausência de aviso com prova de segurança.",
-    "Aplicar uma correção sem testar o comportamento e o contexto."
-  ],
-  "checklist_de_correcao": [
-    "Prefira execFile ou spawn sem shell",
-    "Fixe o executável e valide argumentos",
-    "Use lista de opções permitidas"
-  ],
-  "referencias": [
-    "https://cwe.mitre.org/data/definitions/78.html"
-  ],
-  "quiz": [
-    {
-      "pergunta": "Qual abordagem evita interpretar metacaracteres do shell?",
-      "opcoes": [
-        "execFile com argumentos separados e shell desligado",
-        "exec com template string",
-        "Remover apenas espaços"
-      ],
-      "resposta": 0,
-      "explicacao": "Argumentos separados não viram comandos adicionais de shell."
-    }
-  ]
-}
+id: SM007
+titulo: Command injection
+severidade: critica
+resumo: Entrada externa não pode compor comandos de shell.
+por_que_e_perigoso:
+  O shell entende separadores de comando. Colar entrada é como permitir novos
+  itens em uma lista de ordens assinada por você.
+exemplo_vulneravel: child_process.exec("echo " + req.query.name);
+exemplo_corrigido: child_process.execFile("echo", [String(req.query.name)]);
+como_explorar_inofensivo:
+  Sem executar o comando, imprima a string formada com a entrada "amostra;
+  echo teste". Observe o segundo comando na string.
+erros_comuns_de_iniciante:
+  - Confundir a ausência de aviso com prova de segurança.
+  - Aplicar uma correção sem testar o comportamento e o contexto.
+checklist_de_correcao:
+  - Prefira execFile ou spawn sem shell
+  - Fixe o executável e valide argumentos
+  - Use lista de opções permitidas
+referencias:
+  - https://cwe.mitre.org/data/definitions/78.html
+quiz:
+  - pergunta: Qual abordagem evita interpretar metacaracteres do shell?
+    opcoes:
+      - execFile com argumentos separados e shell desligado
+      - exec com template string
+      - Remover apenas espaços
+    resposta: 0
+    explicacao: Argumentos separados não viram comandos adicionais de shell.

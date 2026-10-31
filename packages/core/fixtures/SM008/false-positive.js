@@ -1,2 +1,1 @@
-// fs.readFile(req.query.path, callback);
-const mensagem = "conteúdo educativo";
+fs.readFile("./assets/profile.txt", callback);

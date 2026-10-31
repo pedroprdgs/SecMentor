@@ -8,16 +8,17 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "pnpm --filter @secmentor/core build && pnpm --filter @secmentor/cli build && pnpm --filter @secmentor/vscode build && pnpm --filter @secmentor/playground build",
+    "build": "pnpm lessons:compile && pnpm --filter @secmentor/core build && pnpm --filter @secmentor/cli build && pnpm --filter secmentor-vscode build && pnpm --filter @secmentor/playground build",
     "dev": "pnpm --filter @secmentor/playground dev",
-    "typecheck": "pnpm -r typecheck",
+    "typecheck": "tsc --noEmit -p tsconfig.tools.json && pnpm -r typecheck",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "secmentor": "tsx packages/cli/src/index.ts",
-    "lint-lessons": "tsx packages/cli/src/index.ts lint-lessons",
-    "benchmark": "tsx scripts/benchmark.ts"
+    "secmentor": "node --import tsx packages/cli/src/index.ts",
+    "lint-lessons": "node --import tsx packages/cli/src/index.ts lint-lessons",
+    "benchmark": "node --import tsx scripts/benchmark.ts",
+    "lessons:compile": "node --import tsx scripts/compile-lessons.ts && prettier --write packages/core/src/lessons.generated.ts"
   },
   "devDependencies": {
     "typescript": "~5.8.3",

@@ -8,7 +8,7 @@ Ambiente: macOS arm64, Node **20.20.2**, pnpm **9.15.9**. Também houve execuç�
 | Lições completas pt-BR | 12 YAMLs validados por Zod                                                                              |
 | Perguntas locais       | 12, uma por lição                                                                                       |
 | Fixtures               | Vulnerável, corrigida e falso positivo por regra; configuração também tem testes com metadados Git/JSON |
-| Suíte                  | 98 testes em 5 arquivos, incluindo CLI ponta a ponta                                                    |
+| Suíte                  | 99 testes em 5 arquivos, incluindo CLI ponta a ponta                                                    |
 | Cobertura do core      | 99,15% linhas/declarações; 95,41% branches; 100% funções                                                |
 | Scan de examples/      | 12 achados em 6 arquivos; 0 avisos; saída 1 esperada                                                    |
 | Benchmark              | 1.000 arquivos TS de 1.249 bytes em 219 ms, incluindo leitura e parse                                   |

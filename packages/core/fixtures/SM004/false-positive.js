@@ -1,2 +1,1 @@
-// const hash = crypto.createHash("md5").update(password).digest("hex");
-const mensagem = "conteúdo educativo";
+const checksum = crypto.createHash("sha256").update(asset).digest("hex");

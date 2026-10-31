@@ -1,34 +1,27 @@
-{
-  "id": "SM003",
-  "titulo": "Segredo no código",
-  "severidade": "critica",
-  "resumo": "Uma credencial no código pode ficar para sempre no histórico.",
-  "por_que_e_perigoso": "É como deixar a chave de casa em uma foto pública. Apagar a foto depois não invalida as cópias.",
-  "exemplo_vulneravel": "const apiKey = \"sk_demo_1234567890\";",
-  "exemplo_corrigido": "const apiKey = process.env.SERVICE_API_KEY;",
-  "como_explorar_inofensivo": "Use apenas a chave fictícia deste exemplo. Faça uma busca local por sk_demo e observe como é fácil encontrá-la.",
-  "erros_comuns_de_iniciante": [
-    "Confundir a ausência de aviso com prova de segurança.",
-    "Aplicar uma correção sem testar o comportamento e o contexto."
-  ],
-  "checklist_de_correcao": [
-    "Revogue e troque o segredo exposto",
-    "Use variáveis de ambiente ou cofre de segredos",
-    "Revise o histórico e os logs"
-  ],
-  "referencias": [
-    "https://cwe.mitre.org/data/definitions/798.html"
-  ],
-  "quiz": [
-    {
-      "pergunta": "O que fazer primeiro com uma chave real exposta?",
-      "opcoes": [
-        "Revogar e substituir a chave",
-        "Apenas apagar a linha",
-        "Mudar o nome da variável"
-      ],
-      "resposta": 0,
-      "explicacao": "Cópias da chave podem existir; revogar impede seu uso."
-    }
-  ]
-}
+id: SM003
+titulo: Segredo no código
+severidade: critica
+resumo: Uma credencial no código pode ficar para sempre no histórico.
+por_que_e_perigoso: É como deixar a chave de casa em uma foto pública. Apagar a foto depois não invalida as cópias.
+exemplo_vulneravel: const apiKey = "sk_demo_1234567890";
+exemplo_corrigido: const apiKey = process.env.SERVICE_API_KEY;
+como_explorar_inofensivo:
+  Use apenas a chave fictícia deste exemplo. Faça uma busca local por
+  sk_demo e observe como é fácil encontrá-la.
+erros_comuns_de_iniciante:
+  - Confundir a ausência de aviso com prova de segurança.
+  - Aplicar uma correção sem testar o comportamento e o contexto.
+checklist_de_correcao:
+  - Revogue e troque o segredo exposto
+  - Use variáveis de ambiente ou cofre de segredos
+  - Revise o histórico e os logs
+referencias:
+  - https://cwe.mitre.org/data/definitions/798.html
+quiz:
+  - pergunta: O que fazer primeiro com uma chave real exposta?
+    opcoes:
+      - Revogar e substituir a chave
+      - Apenas apagar a linha
+      - Mudar o nome da variável
+    resposta: 0
+    explicacao: Cópias da chave podem existir; revogar impede seu uso.

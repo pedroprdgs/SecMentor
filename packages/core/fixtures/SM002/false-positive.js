@@ -1,2 +1,1 @@
-// element.innerHTML = req.query.message;
-const mensagem = "conteúdo educativo";
+element.textContent = message;

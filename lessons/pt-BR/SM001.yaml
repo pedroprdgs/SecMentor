@@ -1,34 +1,29 @@
-{
-  "id": "SM001",
-  "titulo": "SQL injection",
-  "severidade": "alta",
-  "resumo": "Consulta SQL não é lugar para colar entrada do usuário.",
-  "por_que_e_perigoso": "Uma consulta é como uma ficha de pedido. Concatenar a entrada permite que alguém escreva novas instruções na ficha.",
-  "exemplo_vulneravel": "db.query(\"SELECT * FROM users WHERE id = \" + req.query.id);",
-  "exemplo_corrigido": "db.query(\"SELECT * FROM users WHERE id = ?\", [req.query.id]);",
-  "como_explorar_inofensivo": "Em um banco temporário, imprima a query com id igual a \"1 OR 1=1\". Observe a mudança na instrução, sem acessar dados reais.",
-  "erros_comuns_de_iniciante": [
-    "Confundir a ausência de aviso com prova de segurança.",
-    "Aplicar uma correção sem testar o comportamento e o contexto."
-  ],
-  "checklist_de_correcao": [
-    "Use parâmetros do driver",
-    "Valide tipo e limite da entrada",
-    "Teste com aspas e entradas inesperadas"
-  ],
-  "referencias": [
-    "https://cwe.mitre.org/data/definitions/89.html"
-  ],
-  "quiz": [
-    {
-      "pergunta": "Qual opção separa dados da instrução SQL?",
-      "opcoes": [
-        "Query parametrizada",
-        "Concatenar após remover espaços",
-        "Template string"
-      ],
-      "resposta": 0,
-      "explicacao": "O driver trata o parâmetro como dado, sem transformá-lo em instrução."
-    }
-  ]
-}
+id: SM001
+titulo: SQL injection
+severidade: alta
+resumo: Consulta SQL não é lugar para colar entrada do usuário.
+por_que_e_perigoso:
+  Uma consulta é como uma ficha de pedido. Concatenar a entrada permite que alguém
+  escreva novas instruções na ficha.
+exemplo_vulneravel: db.query("SELECT * FROM users WHERE id = " + req.query.id);
+exemplo_corrigido: db.query("SELECT * FROM users WHERE id = ?", [req.query.id]);
+como_explorar_inofensivo:
+  Em um banco temporário, imprima a query com id igual a "1 OR 1=1". Observe
+  a mudança na instrução, sem acessar dados reais.
+erros_comuns_de_iniciante:
+  - Confundir a ausência de aviso com prova de segurança.
+  - Aplicar uma correção sem testar o comportamento e o contexto.
+checklist_de_correcao:
+  - Use parâmetros do driver
+  - Valide tipo e limite da entrada
+  - Teste com aspas e entradas inesperadas
+referencias:
+  - https://cwe.mitre.org/data/definitions/89.html
+quiz:
+  - pergunta: Qual opção separa dados da instrução SQL?
+    opcoes:
+      - Query parametrizada
+      - Concatenar após remover espaços
+      - Template string
+    resposta: 0
+    explicacao: O driver trata o parâmetro como dado, sem transformá-lo em instrução.
