@@ -152,3 +152,7 @@ vite.config.ts.timestamp-*
 **/test-results/
 **/playwright-report/
 .lighthouse/
+
+# macOS
+.DS_Store
+.AppleDouble

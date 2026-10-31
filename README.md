@@ -10,26 +10,28 @@ Quase todo material de segurança de código está em inglês e é pensado para 
 
 ![Front end do SecMentor](docs/screenshots/inicio.png)
 
-## Experimente em três comandos
+## Instalar e rodar
 
-Requisitos: Node 20+, Git e Corepack. Execute na raiz deste repositório já clonado:
+Requisitos: Node 20+ (validado com 20.20.2), Git e Corepack. Clone e entre no projeto:
 
 ```sh
-corepack enable && pnpm install --frozen-lockfile
-pnpm build
-pnpm secmentor scan examples/
+git clone https://github.com/pedroprdgs/SecMentor.git
+cd SecMentor
 ```
 
-O último comando termina com **código 1**, pois os exemplos são vulneráveis de propósito. Não os publique.
-Sem permissão para escrever em `/usr/local/bin`, não use sudo: `corepack pnpm dev` inicia o front end já instalado, pois o script não depende de um bin global. Para habilitar todos os comandos pnpm na sua conta:
+Habilite pnpm na sua conta, sem sudo, e instale:
 
 ```sh
 mkdir -p "$HOME/.local/bin"
 corepack enable --install-directory "$HOME/.local/bin"
 export PATH="$HOME/.local/bin:$PATH"
+pnpm install --frozen-lockfile
+pnpm build
+pnpm secmentor scan examples/
 ```
 
-Depois, execute `pnpm install --frozen-lockfile` e `pnpm build`. A configuração do PATH vale para este Terminal; adicione-a ao seu perfil se quiser persistir.
+O último comando termina com **código 1**, pois os exemplos são vulneráveis de propósito. Não os publique.
+A configuração do PATH vale para este Terminal; adicione-a ao seu perfil para persistir. O diretório local evita o erro EACCES em `/usr/local/bin`.
 
 Abra o front end com `pnpm dev`, normalmente em **http://127.0.0.1:5173**. Para apresentar, use **http://127.0.0.1:5173/demo**. A CLI compilada também funciona com `node packages/cli/dist/index.js`.
 
@@ -168,7 +170,7 @@ Para testar a extensão: abra a raiz no VS Code e pressione F5 com a configuraç
 
 `action.yml` pode ser usada como Action local depois de checkout (`uses: ./`) ou via referência deste repositório após publicação. Copie o exemplo em [docs/github-action.md](docs/github-action.md), usando a referência real e, preferencialmente, um SHA revisado. Achados não bloqueiam o job por padrão; análise incompleta bloqueia. O output `exit-code` permite definir a política do repositório.
 
-O workflow [Pages](.github/workflows/pages.yml) publica `packages/playground/dist` após habilitar **Settings → Pages → GitHub Actions** no GitHub. Nenhum deploy remoto foi feito por esta entrega.
+O workflow [Pages](.github/workflows/pages.yml) publica `packages/playground/dist` após habilitar **Settings → Pages → GitHub Actions** no GitHub. O [site público](https://pedroprdgs.github.io/SecMentor/) está disponível; a [demo](https://pedroprdgs.github.io/SecMentor/demo) também funciona com cache PWA concluído. A publicação pública pode estar atrás dos commits locais da revisão; confira o SHA no GitHub Actions.
 
 ## Comunidade e próximos passos
 
