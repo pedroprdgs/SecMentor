@@ -8,11 +8,13 @@ import {
   preflightZip,
   MAX_FILE,
   readZip,
+  droppedFiles,
 } from '../features/analyzer/files.js';
 import {
   useProgress,
   emptyProgress,
   nextStreak,
+  activeDays,
   level,
 } from '../features/progress/store.js';
 import {
@@ -68,6 +70,34 @@ describe('analisador e entradas', () => {
     const result = await readZip(new File([buffer], 'project.zip'));
     expect(result).toEqual([{ path: 'src/app.ts', content: 'eval(input)' }]);
   });
+  it('captura todos os itens arrastados antes de o navegador proteger DataTransfer', async () => {
+    let readable = true;
+    const files = [
+      new File(['eval(input)'], 'a.ts'),
+      new File(['const a = 1'], 'b.ts'),
+    ];
+    const entries = files.map((file, index) => ({
+      isFile: true,
+      isDirectory: false,
+      name: file.name,
+      fullPath: '/' + file.name,
+      file: (done: (value: File) => void) => {
+        if (index === 0) readable = false;
+        done(file);
+      },
+    }));
+    const transfer = {
+      items: entries.map((entry) => ({
+        webkitGetAsEntry: () => (readable ? entry : null),
+        getAsFile: () => null,
+      })),
+      files: [],
+    } as unknown as DataTransfer;
+    expect((await droppedFiles(transfer)).map((file) => file.name)).toEqual([
+      'a.ts',
+      'b.ts',
+    ]);
+  });
   it('não persiste código e rejeita resultados de uma revisão antiga', () => {
     const store = useAnalyzer.getState();
     store.replace([{ path: 'a.ts', content: 'const secret="teste"' }]);
@@ -116,6 +146,9 @@ describe('progresso e preferências locais', () => {
     expect(nextStreak('2026-10-28', 4, new Date(2026, 9, 31))).toMatchObject({
       days: 1,
     });
+    expect(activeDays('2026-10-30', 3, new Date(2026, 9, 31))).toBe(3);
+    expect(activeDays('2026-10-31', 4, new Date(2026, 9, 31))).toBe(4);
+    expect(activeDays('2026-10-28', 4, new Date(2026, 9, 31))).toBe(0);
   });
   it('registra conquistas e histórico sem trechos de código', () => {
     for (let i = 0; i < 10; i++)

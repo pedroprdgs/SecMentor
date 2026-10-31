@@ -48,13 +48,14 @@ test('demo de produção, landing e criador de lição', async ({ page }) => {
   await page.screenshot({ path: resolve(shots, 'inicio.png'), fullPage: true });
   await page.goto('/demo');
   await expect(page.getByText('1 achado(s)', { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: /03.*Ver a correção/ }).click();
+  await expect(
+    page.getByRole('tabpanel', { name: 'Entenda o risco' }),
+  ).toBeVisible();
   await expect(
     page
       .getByRole('tabpanel', { name: 'Antes e depois' })
       .getByText('DEPOIS · EXEMPLO DIDÁTICO'),
   ).toBeVisible();
-  await page.getByRole('button', { name: /04.*Praticar com quiz/ }).click();
   await expect(
     page.getByText('Qual opção separa dados da instrução SQL?'),
   ).toBeVisible();
@@ -153,10 +154,26 @@ test('correção com desfazer, relatório e link privado no fragmento', async ({
   expect(new URL(link).hash).toContain('codigo=');
   expect(new URL(link).search).toBe('');
   await page.goto(link);
+  await page.reload();
   await expect(page.locator('.cm-content')).toContainText('httpOnly: false');
   await expect(
     page.getByText('2 achado(s)', { exact: true }).first(),
   ).toBeVisible();
+  await page
+    .getByRole('button', { name: /CORS e cookies permissivos.*Linha 2/ })
+    .click();
+  await page.getByRole('tab', { name: 'Antes e depois' }).click();
+  await page
+    .getByRole('button', { name: 'Aplicar correção no editor' })
+    .click();
+  await expect(
+    page.getByRole('button', { name: 'Desfazer última correção' }),
+  ).toBeVisible();
+  await page.locator('.cm-content').press('ControlOrMeta+End');
+  await page.locator('.cm-content').press('Enter');
+  await expect(
+    page.getByRole('button', { name: 'Desfazer última correção' }),
+  ).toBeHidden();
 });
 
 test('ZIP com múltiplos arquivos, árvore e análise em Worker', async ({
@@ -185,4 +202,28 @@ test('ZIP com múltiplos arquivos, árvore e análise em Worker', async ({
   await expect(
     page.getByRole('button', { name: /Execução dinâmica de código.*SM006/ }),
   ).toBeVisible();
+});
+
+test('projeto Express + React real, métricas e captura', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('/analisar');
+  await skipTour(page);
+  await page
+    .getByRole('button', { name: 'Projeto Express + React', exact: false })
+    .click();
+  await page
+    .getByRole('button', { name: 'Analisar código', exact: true })
+    .click();
+  await expect(page.locator('.finding')).toHaveCount(12);
+  await expect(page.locator('.result-footer')).toContainText('3 arquivo(s)');
+  console.log(
+    'WEB_PROJECT_METRIC:',
+    await page.locator('.result-footer').innerText(),
+  );
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({
+    path: resolve(shots, 'projeto.png'),
+    fullPage: true,
+    animations: 'disabled',
+  });
 });

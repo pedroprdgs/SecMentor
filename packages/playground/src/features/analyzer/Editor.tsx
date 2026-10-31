@@ -1,7 +1,17 @@
 import { useEffect, useRef } from 'react';
 import { EditorView, keymap } from '@codemirror/view';
-import { EditorState, Compartment } from '@codemirror/state';
+import { EditorState, Compartment, Annotation } from '@codemirror/state';
 import { basicSetup } from 'codemirror';
+import { HighlightStyle, syntaxHighlighting } from '@codemirror/language';
+import { tags } from '@lezer/highlight';
+const externalUpdate = Annotation.define<boolean>();
+const codeColors = HighlightStyle.define([
+  { tag: [tags.keyword, tags.typeName], color: 'var(--blue)' },
+  { tag: tags.string, color: 'var(--accent)' },
+  { tag: tags.number, color: 'var(--warn)' },
+  { tag: tags.comment, color: 'var(--subtle)' },
+  { tag: [tags.name, tags.operator, tags.punctuation], color: 'var(--text)' },
+]);
 import { javascript } from '@codemirror/lang-javascript';
 import { json } from '@codemirror/lang-json';
 import { lintGutter, setDiagnostics, type Diagnostic } from '@codemirror/lint';
@@ -43,6 +53,7 @@ export default function Editor({
         doc: content,
         extensions: [
           basicSetup,
+          syntaxHighlighting(codeColors),
           lintGutter(),
           keymap.of([indentWithTab]),
           EditorView.contentAttributes.of({
@@ -83,7 +94,13 @@ export default function Editor({
           ),
           mode.current.of([]),
           EditorView.updateListener.of((update) => {
-            if (update.docChanged) onEdit.current(update.state.doc.toString());
+            if (
+              update.docChanged &&
+              !update.transactions.some((transaction) =>
+                transaction.annotation(externalUpdate),
+              )
+            )
+              onEdit.current(update.state.doc.toString());
           }),
         ],
       }),
@@ -99,6 +116,7 @@ export default function Editor({
     if (editor && editor.state.doc.toString() !== content)
       editor.dispatch({
         changes: { from: 0, to: editor.state.doc.length, insert: content },
+        annotations: externalUpdate.of(true),
       });
   }, [content, path]);
   useEffect(() => {

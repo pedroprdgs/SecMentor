@@ -132,7 +132,7 @@ export default function ReportTools({
                 }
               >
                 <Copy size={15} />
-                {t.common.copy}
+                {t.common.copyLink}
               </button>
             </>
           ) : (

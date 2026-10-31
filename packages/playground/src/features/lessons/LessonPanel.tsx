@@ -49,6 +49,7 @@ export default function LessonPanel({
   const [question, setQuestion] = useState('');
   const [request, setRequest] = useState<'explain' | 'answer' | 'quiz'>();
   const [answer, setAnswer] = useState('');
+  const [answerSource, setAnswerSource] = useState<'ia' | 'local'>('ia');
   const [busy, setBusy] = useState(false);
   const [extra, setExtra] = useState<NonNullable<typeof lesson>['quiz']>();
   const ai = useSettings((s) => s.ai);
@@ -84,6 +85,8 @@ export default function LessonPanel({
     if (!task) return;
     setBusy(true);
     setAnswer('');
+    setAnswerSource('ia');
+    if (task === 'quiz') setExtra(undefined);
     setNotice('');
     try {
       const { OpenAICompatibleProvider } = await import('@secmentor/core/llm');
@@ -100,6 +103,7 @@ export default function LessonPanel({
             : await provider.explain(lesson!),
         );
     } catch {
+      setAnswerSource('local');
       setAnswer(lesson!.resumo + '\n\n' + lesson!.por_que_e_perigoso);
       setNotice(t.lesson.fallback);
     } finally {
@@ -278,7 +282,9 @@ export default function LessonPanel({
       )}
       {answer && (
         <div className="ai-answer">
-          <span className="eyebrow">{t.lesson.aiReview}</span>
+          <span className="eyebrow">
+            {answerSource === 'ia' ? t.lesson.aiReview : t.lesson.localSource}
+          </span>
           <p>{answer}</p>
         </div>
       )}

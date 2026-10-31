@@ -8,7 +8,7 @@ Build, lint, tipos, lições e testes executados em macOS arm64 com **Node 20.20
 | ------------------------------------ | ----------------------------------------------------------------------------------------- |
 | Famílias de regras / lições pt-BR    | 12 / 12, consumidas do core                                                               |
 | Perguntas locais                     | 12; quiz rápido usa cinco perguntas embaralhadas                                          |
-| Testes unitários e de componentes    | **117 aprovados**, em sete arquivos: 99 existentes de core/CLI + 18 do front end          |
+| Testes unitários e de componentes    | **118 aprovados**, em sete arquivos: 99 existentes de core/CLI + 19 do front end          |
 | Playwright / Chromium                | **7 E2Es aprovados** no build de produção                                                 |
 | Cobertura do core                    | **98,94% linhas/declarações**, **95,42% branches**, **100% funções**                      |
 | Projeto Express + React no navegador | **3 arquivos, 12 achados, 7 ms de processamento no Worker**                               |
@@ -63,6 +63,7 @@ Capturas reais geradas por Playwright em [docs/screenshots](../screenshots/READM
 - CI, Pages, comentário de PR e code scanning estão configurados, mas não foram executados no GitHub nesta sessão. Nenhum push, deploy público, publicação npm/Marketplace ou submissão ao evento foi feito.
 - O front end foi testado em Chromium. Firefox, WebKit, leitor de tela e auditoria manual completa de WCAG ainda precisam de revisão.
 - IA real não foi chamada. O adaptador existente tem testes simulados e a UI foi testada até o consentimento. Endpoints precisam permitir CORS; uma base HTTP pode ser bloqueada por uma página HTTPS. Chaves no localStorage não têm criptografia.
+- Perguntas extras da IA aparecem com respostas expansíveis; não entram na pontuação do quiz local.
 - Metadados são atualizados por rota no navegador. Crawlers sem JavaScript recebem o Open Graph geral da landing; não há prerender por lição.
 - O navegador não tem Git: .env importado recebe alerta conservador. Use a CLI para verificar rastreamento/ignore reais.
 - O core mantém heurísticas por arquivo, sem resolução completa de escopos e sem fluxo entre arquivos ou banco de CVEs. Auto-fix cobre apenas httpOnly; en é esqueleto.

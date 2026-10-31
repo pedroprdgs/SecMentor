@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Award, CheckCircle2, ArrowUpRight } from 'lucide-react';
 import { t } from '../i18n/index.js';
 import { lessons } from '../lib/content.js';
-import { useProgress, level } from '../features/progress/store.js';
+import { useProgress, level, activeDays } from '../features/progress/store.js';
 import { useSettings } from '../features/settings/store.js';
 import { useAnalyzer } from '../features/analyzer/store.js';
 import { clearLocalData } from '../lib/storage.js';
@@ -44,7 +44,7 @@ export default function Progress() {
         </div>
         <div className="stat">
           <small>{t.progress.streak}</small>
-          <strong>{state.days}</strong>
+          <strong>{activeDays(state.lastDay, state.days)}</strong>
         </div>
         <div className="stat">
           <small>{t.progress.lessons}</small>

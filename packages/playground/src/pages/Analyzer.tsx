@@ -35,7 +35,10 @@ export default function Analyzer() {
   const [importing, setImporting] = useState(false);
   const [replace, setReplace] = useState<Example>();
   const [undoToken, setUndoToken] = useState(0);
-  const [canUndo, setCanUndo] = useState(false);
+  const [correction, setCorrection] = useState<{
+    path: string;
+    revision: number;
+  }>();
   const [dragging, setDragging] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
   const folderInput = useRef<HTMLInputElement>(null);
@@ -326,7 +329,10 @@ export default function Analyzer() {
               <Editor
                 path={active.path}
                 content={active.content}
-                onChange={(content) => state.edit(active.path, content)}
+                onChange={(content) => {
+                  state.edit(active.path, content);
+                  setCorrection(undefined);
+                }}
                 findings={
                   !stale
                     ? (state.result?.findings.filter(
@@ -348,17 +354,18 @@ export default function Analyzer() {
               <span className="status-dot" />
               {t.noUpload}
             </span>
-            {canUndo && (
-              <button
-                className="button"
-                onClick={() => {
-                  setUndoToken((n) => n + 1);
-                  setCanUndo(false);
-                }}
-              >
-                {t.lesson.undo}
-              </button>
-            )}
+            {correction?.path === state.active &&
+              correction?.revision === state.revision && (
+                <button
+                  className="button"
+                  onClick={() => {
+                    setUndoToken((n) => n + 1);
+                    setCorrection(undefined);
+                  }}
+                >
+                  {t.lesson.undo}
+                </button>
+              )}
             {busy ? (
               <button className="button" onClick={() => abort.current?.abort()}>
                 {t.analyzer.cancel}
@@ -398,7 +405,11 @@ export default function Analyzer() {
             finding={state.selected}
             onApplied={() => {
               setNotice(t.lesson.applied);
-              setCanUndo(true);
+              const current = useAnalyzer.getState();
+              setCorrection({
+                path: current.active,
+                revision: current.revision,
+              });
             }}
             onUndo={() => setUndoToken((n) => n + 1)}
           />

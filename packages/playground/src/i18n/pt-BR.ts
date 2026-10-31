@@ -29,6 +29,7 @@ export const pt = {
     back: 'Voltar',
     copy: 'Copiar correção',
     copied: 'Copiado para a área de transferência.',
+    copyLink: 'Copiar link',
     copyError: 'Não foi possível copiar. Selecione o texto manualmente.',
     download: 'Baixar YAML',
     reset: 'Restaurar exemplo',
@@ -200,6 +201,7 @@ export const pt = {
     send: 'Perguntar ao tutor',
     extraQuiz: 'Gerar perguntas extras',
     aiReview: 'Texto gerado por IA: confira as referências.',
+    localSource: 'Lição local · IA indisponível',
     fallback: 'IA indisponível. A lição local continua disponível.',
     aiWarning:
       'Você enviará a lição e, se houver, sua pergunta ao endpoint configurado. O arquivo e o trecho do editor não serão enviados. Não inclua código privado nem segredos na pergunta.',

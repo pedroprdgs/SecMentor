@@ -36,6 +36,11 @@ export function nextStreak(lastDay: string, days: number, now: Date) {
       lastDay === today ? days : lastDay === dayKey(yesterday) ? days + 1 : 1,
   };
 }
+export function activeDays(lastDay: string, days: number, now = new Date()) {
+  const yesterday = new Date(now);
+  yesterday.setDate(yesterday.getDate() - 1);
+  return lastDay === dayKey(now) || lastDay === dayKey(yesterday) ? days : 0;
+}
 export function level(points: number) {
   return points >= 200
     ? t.progress.guardian

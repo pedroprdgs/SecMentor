@@ -125,7 +125,12 @@ export async function readZip(file: File): Promise<SourceFile[]> {
   return validateProject(result);
 }
 export async function droppedFiles(transfer: DataTransfer): Promise<File[]> {
-  const items = Array.from(transfer.items);
+  // O navegador protege DataTransfer ao terminar o evento; capture antes do primeiro await.
+  const items = Array.from(transfer.items).map((item) => ({
+    entry: item.webkitGetAsEntry?.(),
+    file: item.getAsFile(),
+  }));
+  const fallback = Array.from(transfer.files);
   const result: File[] = [];
   async function visit(entry: FileSystemEntry) {
     if (result.length > MAX_FILES) throw new Error(t.analyzer.limit);
@@ -150,15 +155,11 @@ export async function droppedFiles(transfer: DataTransfer): Promise<File[]> {
       }
     }
   }
-  for (const item of items) {
-    const entry = item.webkitGetAsEntry?.();
+  for (const { entry, file } of items) {
     if (entry) await visit(entry);
-    else {
-      const file = item.getAsFile();
-      if (file) result.push(file);
-    }
+    else if (file) result.push(file);
   }
-  return result.length ? result : Array.from(transfer.files);
+  return result.length ? result : fallback;
 }
 export type Language = 'auto' | 'js' | 'ts' | 'jsx' | 'tsx' | 'json' | 'env';
 export function detectLanguage(path: string): Exclude<Language, 'auto'> {

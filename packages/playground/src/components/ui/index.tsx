@@ -4,13 +4,7 @@ import { t } from '../../i18n/index.js';
 import type { Severity } from '@secmentor/core';
 export function Logo() {
   return (
-    <svg
-      role="img"
-      aria-label={t.brand}
-      width="32"
-      height="36"
-      viewBox="0 0 40 44"
-    >
+    <svg aria-hidden="true" width="32" height="36" viewBox="0 0 40 44">
       <path
         d="M20 2 37 8v13c0 10-17 21-17 21S3 31 3 21V8Z"
         fill="currentColor"

@@ -18,6 +18,9 @@ export default function Demo() {
   const [paused, setPaused] = useState(Boolean(reduced));
   const [error, setError] = useState('');
   useEffect(() => {
+    if (reduced) setPaused(true);
+  }, [reduced]);
+  useEffect(() => {
     const controller = new AbortController();
     setStep(0);
     setResult(undefined);
