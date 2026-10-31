@@ -8,12 +8,13 @@ Build, lint, tipos, lições e testes executados em macOS arm64 com **Node 20.20
 | ------------------------------------ | ----------------------------------------------------------------------------------------- |
 | Famílias de regras / lições pt-BR    | 12 / 12, consumidas do core                                                               |
 | Perguntas locais                     | 12; quiz rápido usa cinco perguntas embaralhadas                                          |
-| Testes unitários e de componentes    | **118 aprovados**, em sete arquivos: 99 existentes de core/CLI + 19 do front end          |
-| Playwright / Chromium                | **7 E2Es aprovados** no build de produção                                                 |
+| Testes unitários e de componentes    | **121 aprovados**, em sete arquivos: 100 de core/CLI + 21 do front end                    |
+| Playwright / Chromium                | **18 E2Es aprovados** no build de produção                                                |
 | Cobertura do core                    | **98,94% linhas/declarações**, **95,42% branches**, **100% funções**                      |
 | Projeto Express + React no navegador | **3 arquivos, 12 achados, 7 ms de processamento no Worker**                               |
+| Projeto grande no navegador          | **1.000 arquivos, 258 ms no Worker**, progresso visível e frames da UI ativos             |
 | CLI scan examples/                   | 12 achados em seis arquivos, sem avisos; saída 1 esperada                                 |
-| Benchmark anterior do mesmo scanner  | 1.000 arquivos TS sintéticos de 1.249 bytes em 219 ms, incluindo leitura/parse no Node 20 |
+| Benchmark recalculado nesta revisão  | 1.000 arquivos TS sintéticos de 1.249 bytes em 196 ms, incluindo leitura/parse no Node 20 |
 | JavaScript inicial                   | Aproximadamente 285 kB minificado / **89 kB gzip**                                        |
 | CSS principal                        | Aproximadamente 46 kB / **10 kB gzip**                                                    |
 | Editor CodeMirror sob demanda        | Aproximadamente 512 kB / 173 kB gzip                                                      |
@@ -26,12 +27,14 @@ A cobertura mede apenas o core e exclui o conteúdo gerado. A entrada leve `core
 
 ## Lighthouse mobile
 
-| Rota        | Performance | Acessibilidade | Boas práticas |   CLS |
-| ----------- | ----------: | -------------: | ------------: | ----: |
-| `/`         |      **99** |        **100** |       **100** | **0** |
-| `/analisar` |      **93** |        **100** |       **100** | **0** |
+| Rota                | Performance | Acessibilidade | Boas práticas |   CLS |
+| ------------------- | ----------: | -------------: | ------------: | ----: |
+| `/`                 |      **99** |        **100** |       **100** | **0** |
+| `/analisar`         |      **93** |        **100** |       **100** | **0** |
+| `/licoes/SM001`     |      **96** |        **100** |       **100** | **0** |
+| `/quiz?licao=SM001` |      **99** |        **100** |       **100** | **0** |
 
-Perfil mobile simulado: 412×823 CSS px, CPU 4×, RTT 150 ms e conexão nominal de 1.638,4 Kbps. Primeira visita, incluindo o tour inicial no analisador. As execuções finais foram feitas separadamente. Configuração, horários e FCP/LCP/TBT estão em [lighthouse.json](lighthouse.json).
+Perfil mobile simulado: 412×823 CSS px, CPU 4×, RTT 150 ms e conexão nominal de 1.638,4 Kbps. Primeira visita, incluindo o tour inicial no analisador. As quatro páginas foram medidas sequencialmente no build final desta revisão. Configuração, horários e FCP/LCP/TBT estão em [lighthouse.json](lighthouse.json).
 
 A primeira medição encontrou contraste insuficiente na animação da landing e deslocamento de layout no analisador. O texto animado passou a manter opacidade integral; o carregamento da rota reserva espaço e o aviso de PWA não desloca a página. A medição foi repetida após essas correções. Lighthouse 100 não equivale a auditoria completa por leitor de tela.
 
@@ -60,9 +63,9 @@ Capturas reais geradas por Playwright em [docs/screenshots](../screenshots/READM
 
 ## Limites e pendências
 
-- CI, Pages, comentário de PR e code scanning estão configurados, mas não foram executados no GitHub nesta sessão. Nenhum push, deploy público, publicação npm/Marketplace ou submissão ao evento foi feito.
-- O front end foi testado em Chromium. Firefox, WebKit, leitor de tela e auditoria manual completa de WCAG ainda precisam de revisão.
-- IA real não foi chamada. O adaptador existente tem testes simulados e a UI foi testada até o consentimento. Endpoints precisam permitir CORS; uma base HTTP pode ser bloqueada por uma página HTTPS. Chaves no localStorage não têm criptografia.
+- CI e Pages do commit público anterior concluíram com sucesso no GitHub. Landing pública HTTP 200 e rotas internas abrem após o fallback; a versão pública ainda devolve HTTP 404 no primeiro acesso/F5 interno. O build local corrigido gera HTML para cada rota conhecida. Os commits desta revisão não foram enviados nem publicados; npm/Marketplace e submissão ao evento também não foram feitos.
+- O front end foi testado em Chromium, nas larguras 360, 768 e 1440 px, em todas as páginas e 12 lições. Tab e setas das abas foram conferidos; uma auditoria integral só por teclado e leitor de tela, Firefox e WebKit ainda precisam de revisão.
+- Nenhum modelo real foi chamado. O adaptador tem testes simulados; a UI agora valida consentimento, URL, header de chave e fallback para endpoint com falha imediata ou timeout de 8 s. Endpoints precisam permitir CORS; uma base HTTP pode ser bloqueada por uma página HTTPS. Chaves no localStorage não têm criptografia.
 - Perguntas extras da IA aparecem com respostas expansíveis; não entram na pontuação do quiz local.
 - Metadados são atualizados por rota no navegador. Crawlers sem JavaScript recebem o Open Graph geral da landing; não há prerender por lição.
 - O navegador não tem Git: .env importado recebe alerta conservador. Use a CLI para verificar rastreamento/ignore reais.
@@ -70,3 +73,11 @@ Capturas reais geradas por Playwright em [docs/screenshots](../screenshots/READM
 - Os chunks do editor e da exportação são grandes, mas carregados sob demanda; não fazem parte do JavaScript inicial. Cache PWA completo exige primeira visita bem-sucedida e não atravessa navegador, perfil ou origem.
 - A extensão VS Code da etapa anterior compila e gera VSIX, mas sua interface não pôde ser conferida por timeout do controle nativo. Essa pendência não foi apresentada como teste concluído.
 - Impacto educacional e precisão em corpus externo ainda não foram medidos.
+
+## Revisão de QA e dependências
+
+As cinco repetições da demo usam contextos novos, sem cache compartilhado. Nenhuma requisição externa nem erro/aviso de console foi observado nesse percurso com IA desligada. O fluxo offline também chega ao diff e responde ao quiz. YAML baixado foi aceito pela CLI; JSON/SARIF foram abertos e o PDF de uma página foi extraído, renderizado e inspecionado.
+
+`pnpm audit --json`: 27 ocorrências antes, 26 depois da atualização de diff 7.0.0 para 8.0.4: 2 críticas, 4 altas, 19 moderadas e 1 baixa. Não são 26 falhas do scanner. Há 21 advisories distintos; veja [audit.json](audit.json) e a avaliação em [REVISAO_QA.md](REVISAO_QA.md). Os alertas remanescentes não foram suprimidos.
+
+[Checklist e planos B](CHECKLIST_APRESENTACAO.md) · [Vídeo local de contingência](../assets/demo-release.webm).

@@ -1,5 +1,7 @@
 # Revisão final do front end
 
+Registro da etapa anterior. A revisão posterior e as evidências atuais estão em [REVISAO_QA.md](../hackathon/REVISAO_QA.md).
+
 Data: 31/10/2026. Evolução de `packages/playground`, consumindo o scanner, as regras e as lições existentes.
 
 ## Correções da revisão

@@ -41,3 +41,9 @@ node packages/cli/dist/index.js quiz SM001
 O scan termina com código **1** por encontrar falhas. Não encadeie com `&&`. A CLI e as lições não precisam de internet. Capturas reais em `docs/screenshots/` servem como material de apoio identificado, nunca como falsa execução ao vivo.
 
 A extensão VS Code permanece disponível, mas sua inspeção visual não foi concluída nesta sessão. Não dependa dela no vídeo antes de validá-la manualmente.
+
+## Revisão final
+
+A bateria atual inclui 121 testes unitários/componentes e 18 E2Es; cinco demos completas em contextos novos passaram. A inspeção de rede não observou requisições externas na demo com IA desligada. Confira os números recalculados em [METRICAS.md](METRICAS.md).
+
+O [checklist](CHECKLIST_APRESENTACAO.md) contém a sequência exata e o [vídeo local](../assets/demo-release.webm) de contingência. O site público pode estar atrás dos commits locais; use o build local validado até publicar a revisão.

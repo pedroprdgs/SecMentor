@@ -1,0 +1,227 @@
+{
+  "checkedAt": "2026-10-31",
+  "node": "20.20.2",
+  "pnpm": "9.15.9",
+  "unitTests": 121,
+  "unitFiles": 7,
+  "e2eTests": 18,
+  "cleanDemoRuns": 5,
+  "unexpectedExternalRequestsInDemo": 0,
+  "browserErrorsOrWarningsInDemo": 0,
+  "viewports": [360, 768, 1440],
+  "largeWebProject": {
+    "files": 1000,
+    "workerMs": 258,
+    "uiFramesObserved": true
+  },
+  "realWebExample": {
+    "files": 3,
+    "findings": 12,
+    "workerMs": 7
+  },
+  "cliBenchmark": {
+    "files": 1000,
+    "bytesPerFile": 1249,
+    "ms": 196
+  },
+  "publicPagesBeforePublishingFix": [
+    {
+      "route": "/",
+      "initial": 200,
+      "refresh": 200,
+      "url": "https://pedroprdgs.github.io/SecMentor/",
+      "title": "SecMentor · SecMentor"
+    },
+    {
+      "route": "/demo",
+      "initial": 404,
+      "refresh": 404,
+      "url": "https://pedroprdgs.github.io/SecMentor/demo",
+      "title": "Do primeiro achado ao próximo aprendizado. · SecMentor"
+    },
+    {
+      "route": "/analisar",
+      "initial": 404,
+      "refresh": 404,
+      "url": "https://pedroprdgs.github.io/SecMentor/analisar",
+      "title": "Analisador · SecMentor"
+    },
+    {
+      "route": "/licoes/SM001",
+      "initial": 404,
+      "refresh": 404,
+      "url": "https://pedroprdgs.github.io/SecMentor/licoes/SM001",
+      "title": "SQL injection · SecMentor"
+    }
+  ],
+  "localPagesWithRepositoryBase": [
+    {
+      "route": "/",
+      "initial": 200,
+      "refresh": 200,
+      "url": "http://127.0.0.1:4181/SecMentor/"
+    },
+    {
+      "route": "/demo",
+      "initial": 200,
+      "refresh": 200,
+      "url": "http://127.0.0.1:4181/SecMentor/demo/"
+    },
+    {
+      "route": "/analisar",
+      "initial": 200,
+      "refresh": 200,
+      "url": "http://127.0.0.1:4181/SecMentor/analisar/"
+    },
+    {
+      "route": "/licoes/SM001",
+      "initial": 200,
+      "refresh": 200,
+      "url": "http://127.0.0.1:4181/SecMentor/licoes/SM001/"
+    }
+  ],
+  "history": {
+    "commits": 34,
+    "uniqueBlobs": 369,
+    "patterns": [
+      "private-key",
+      "github-token",
+      "aws-key",
+      "api-key",
+      "personal-path"
+    ],
+    "findings": []
+  },
+  "links": [
+    {
+      "url": "https://cwe.mitre.org/data/definitions/1104.html",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://cwe.mitre.org/data/definitions/200.html",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://cwe.mitre.org/data/definitions/208.html",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://cwe.mitre.org/data/definitions/22.html",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://cwe.mitre.org/data/definitions/347.html",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://cwe.mitre.org/data/definitions/614.html",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://cwe.mitre.org/data/definitions/78.html",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://cwe.mitre.org/data/definitions/79.html",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://cwe.mitre.org/data/definitions/798.html",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://cwe.mitre.org/data/definitions/89.html",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://cwe.mitre.org/data/definitions/916.html",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://cwe.mitre.org/data/definitions/95.html",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://developers.openai.com/api/reference/resources/chat",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://img.shields.io/badge/Node-20%2B-416c25",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://img.shields.io/badge/TypeScript-strict-3178c6",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://img.shields.io/badge/licen%C3%A7a-MIT-blue",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://img.shields.io/badge/n%C3%BAcleo-100%25_offline-416c25",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://pedroprdgs.github.io/SecMentor/",
+      "status": "200",
+      "exit": 0
+    },
+    {
+      "url": "https://github.com/pedroprdgs/SecMentor",
+      "status": "200",
+      "exit": 0
+    }
+  ],
+  "ciBaseline": [
+    {
+      "name": "Playground · GitHub Pages",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "569825343930d1bb3f341de92dd25ccdc476ec1c",
+      "html_url": "https://github.com/pedroprdgs/SecMentor/actions/runs/41233360718"
+    },
+    {
+      "name": "CI",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "569825343930d1bb3f341de92dd25ccdc476ec1c",
+      "html_url": "https://github.com/pedroprdgs/SecMentor/actions/runs/41233360701"
+    }
+  ],
+  "commandsPassed": [
+    "pnpm install --frozen-lockfile",
+    "pnpm dev (HTTP 200)",
+    "pnpm build",
+    "pnpm lint",
+    "pnpm typecheck",
+    "pnpm test",
+    "pnpm test:coverage",
+    "pnpm lint-lessons",
+    "pnpm test:e2e"
+  ],
+  "auditExitCode": 1,
+  "artifacts": {
+    "yaml": "SM001.yaml validado pela CLI",
+    "json": "findings[0].ruleId === SM001",
+    "sarif": "version === 2.1.0; resultado SM001",
+    "pdf": "1 página; texto extraído e PNG inspecionado",
+    "video": "docs/assets/demo-release.webm; gravação local sem narração"
+  }
+}

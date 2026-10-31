@@ -35,3 +35,7 @@ Privacidade funciona melhor quando é uma fronteira de arquitetura: o adaptador 
 ### Estado atual e convite
 
 O repositório entrega 12 regras e lições, três superfícies de uso e integração de CI. As métricas reproduzíveis estão em METRICAS.md. Correções automáticas permanecem restritas ao caso revisável de httpOnly; análise entre arquivos, publicação de pacotes e estudo com alunos são próximos passos. Contribua com uma fixture, uma explicação melhor ou uma tradução: ensinar segurança também é construir software seguro.
+
+### Evidências desta revisão
+
+12 regras e 12 lições; 121 testes unitários/componentes e 18 E2Es aprovados, incluindo cinco demos com cache limpo. O projeto Express + React teve 12 achados em 3 arquivos e 7 ms no Worker. Lighthouse mobile: landing 99/100/100; analisador 93/100/100. São medições de laboratório, sem garantia de precisão ou impacto educacional. Há alertas de dependências pendentes; não apresente a revisão como certificação de segurança.

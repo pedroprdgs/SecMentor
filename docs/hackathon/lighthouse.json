@@ -1,9 +1,9 @@
 {
-  "environment": "macOS arm64; Chrome for Testing 156; Lighthouse CLI executado com Node 24.19.0; build e suíte com Node 20.20.2; servidor Vite preview local",
+  "environment": "macOS arm64; Chrome for Testing 156; Lighthouse CLI Node 24.19.0; build e testes Node 20.20.2; Vite preview local na porta 4180",
   "runs": [
     {
       "page": "/",
-      "fetchedAt": "2026-10-31T18:49:02.773Z",
+      "fetchedAt": "2026-10-31T19:29:16.295Z",
       "lighthouseVersion": "12.8.2",
       "formFactor": "mobile",
       "screenEmulation": {
@@ -28,15 +28,15 @@
         "best-practices": 100
       },
       "metrics": {
-        "FCP": 1491.7535,
-        "LCP": 1588.3042,
+        "FCP": 1505.455,
+        "LCP": 1754.746,
         "TBT": 0,
         "CLS": 0
       }
     },
     {
       "page": "/analisar",
-      "fetchedAt": "2026-10-31T18:46:45.106Z",
+      "fetchedAt": "2026-10-31T19:29:28.295Z",
       "lighthouseVersion": "12.8.2",
       "formFactor": "mobile",
       "screenEmulation": {
@@ -61,9 +61,75 @@
         "best-practices": 100
       },
       "metrics": {
-        "FCP": 1598.1565,
-        "LCP": 3190.7504,
-        "TBT": 17.5,
+        "FCP": 1628.583875,
+        "LCP": 3191.0342,
+        "TBT": 37,
+        "CLS": 0
+      }
+    },
+    {
+      "page": "/licoes/SM001",
+      "fetchedAt": "2026-10-31T19:29:40.796Z",
+      "lighthouseVersion": "12.8.2",
+      "formFactor": "mobile",
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "throttlingMethod": "simulate",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "scores": {
+        "performance": 96,
+        "accessibility": 100,
+        "best-practices": 100
+      },
+      "metrics": {
+        "FCP": 1846.3410000000001,
+        "LCP": 2472.3092,
+        "TBT": 35.5,
+        "CLS": 0
+      }
+    },
+    {
+      "page": "/quiz?licao=SM001",
+      "fetchedAt": "2026-10-31T19:29:53.648Z",
+      "lighthouseVersion": "12.8.2",
+      "formFactor": "mobile",
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "throttlingMethod": "simulate",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100
+      },
+      "metrics": {
+        "FCP": 1521.504,
+        "LCP": 1990.2048,
+        "TBT": 0,
         "CLS": 0
       }
     }

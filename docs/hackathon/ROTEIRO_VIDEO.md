@@ -15,3 +15,5 @@
 Prepare o ambiente seguindo DEMO.md. Use o modo demonstração como percurso principal e pause para ler. Com movimento reduzido, os controles manuais mantêm o fluxo. Se a rede cair, o build com cache PWA pronto continua funcionando. Se o navegador falhar, use a CLI offline e identifique capturas como material previamente gravado.
 
 Não mostre credenciais nas Configurações. Não declare precisão, impacto educacional, teste de leitor de tela, deploy ou integração remota sem a evidência correspondente em METRICAS.md.
+
+Há uma gravação sem narração da demo automática em [demo-release.webm](../assets/demo-release.webm), feita no build local. Use-a como contingência e identifique-a como gravação. Para gravar o pitch completo, siga a tabela acima. Métricas atuais: 12 regras, 12 lições, 121 testes e 18 E2Es; Lighthouse de performance 99 na landing e 93 no analisador, com acessibilidade e boas práticas 100 em ambos.

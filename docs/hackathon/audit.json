@@ -1,0 +1,351 @@
+{
+  "checkedAt": "2026-10-31",
+  "command": "pnpm audit --json",
+  "pnpm": "9.15.9",
+  "before": {
+    "low": 2,
+    "moderate": 19,
+    "high": 4,
+    "critical": 2
+  },
+  "after": {
+    "info": 0,
+    "low": 1,
+    "moderate": 19,
+    "high": 4,
+    "critical": 2
+  },
+  "fixed": "diff 7.0.0 → 8.0.4; build, unitários e E2E de diff/correção verificados.",
+  "remaining": [
+    {
+      "module_name": "react-router",
+      "severity": "moderate",
+      "title": "React Router: Open redirect via backslash in <Link> and useNavigate (CVE-2025-68470 bypass)",
+      "url": "https://github.com/advisories/GHSA-wrjc-x8rr-h8h6",
+      "vulnerable_versions": ">=6.0.0 <7.18.0",
+      "patched_versions": ">=7.18.0",
+      "installed": ["6.30.6"],
+      "paths": [
+        "packages/playground > react-router-dom@6.30.6 > react-router@6.30.6"
+      ]
+    },
+    {
+      "module_name": "react-router",
+      "severity": "moderate",
+      "title": "React Router: Arbitrary Constructor Injection via deserializeErrors() in React Router SSR Hydration",
+      "url": "https://github.com/advisories/GHSA-337j-9hxr-rhxg",
+      "vulnerable_versions": ">=6.4.0 <7.18.0",
+      "patched_versions": ">=7.18.0",
+      "installed": ["6.30.6"],
+      "paths": [
+        "packages/playground > react-router-dom@6.30.6 > react-router@6.30.6"
+      ]
+    },
+    {
+      "module_name": "extract-zip",
+      "severity": "high",
+      "title": "extract-zip unvalidated symlink path traversal",
+      "url": "https://github.com/advisories/GHSA-jmr9-qjv8-65gv",
+      "vulnerable_versions": "<=2.0.1",
+      "patched_versions": "<0.0.0",
+      "installed": ["2.0.1"],
+      "paths": [
+        "packages/playground > lighthouse@12.8.2 > puppeteer-core@24.43.1 > @puppeteer/browsers@2.13.2 > extract-zip@2.0.1"
+      ]
+    },
+    {
+      "module_name": "@opentelemetry/core",
+      "severity": "moderate",
+      "title": "OpenTelemetry Core: Unbounded memory allocation in W3C Baggage propagation",
+      "url": "https://github.com/advisories/GHSA-8988-4f7v-96qf",
+      "vulnerable_versions": "<2.8.0",
+      "patched_versions": ">=2.8.0",
+      "installed": ["1.30.1"],
+      "paths": [
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-amqplib@0.46.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-connect@0.43.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-express@0.47.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-fs@0.19.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-hapi@0.45.2 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-http@0.57.2 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-koa@0.47.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-mongoose@0.46.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-mysql2@0.45.2 > @opentelemetry/sql-common@0.40.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-pg@0.51.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-pg@0.51.1 > @opentelemetry/sql-common@0.40.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-undici@0.10.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/resources@1.30.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/sdk-trace-base@1.30.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/sdk-trace-base@1.30.1 > @opentelemetry/resources@1.30.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @sentry/node-core@9.47.2 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @sentry/node-core@9.47.2 > @opentelemetry/resources@1.30.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @sentry/node-core@9.47.2 > @opentelemetry/sdk-trace-base@1.30.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @sentry/node-core@9.47.2 > @opentelemetry/sdk-trace-base@1.30.1 > @opentelemetry/resources@1.30.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @sentry/node-core@9.47.2 > @sentry/opentelemetry@9.47.2 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @sentry/node-core@9.47.2 > @sentry/opentelemetry@9.47.2 > @opentelemetry/sdk-trace-base@1.30.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @sentry/node-core@9.47.2 > @sentry/opentelemetry@9.47.2 > @opentelemetry/sdk-trace-base@1.30.1 > @opentelemetry/resources@1.30.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @sentry/opentelemetry@9.47.2 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @sentry/opentelemetry@9.47.2 > @opentelemetry/sdk-trace-base@1.30.1 > @opentelemetry/core@1.30.1",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @sentry/opentelemetry@9.47.2 > @opentelemetry/sdk-trace-base@1.30.1 > @opentelemetry/resources@1.30.1 > @opentelemetry/core@1.30.1"
+      ]
+    },
+    {
+      "module_name": "vitest",
+      "severity": "moderate",
+      "title": "Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redirect Mock",
+      "url": "https://github.com/advisories/GHSA-82fw-gwwq-j7x9",
+      "vulnerable_versions": ">=2.1.0 <4.1.11",
+      "patched_versions": ">=4.1.11",
+      "installed": ["3.2.7"],
+      "paths": [
+        ". > @vitest/coverage-v8@3.2.7 > vitest@3.2.7",
+        ". > vitest@3.2.7"
+      ]
+    },
+    {
+      "module_name": "@vitest/mocker",
+      "severity": "moderate",
+      "title": "Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redirect Mock",
+      "url": "https://github.com/advisories/GHSA-82fw-gwwq-j7x9",
+      "vulnerable_versions": ">=2.1.0 <4.1.11",
+      "patched_versions": ">=4.1.11",
+      "installed": ["3.2.7"],
+      "paths": [
+        ". > @vitest/coverage-v8@3.2.7 > vitest@3.2.7 > @vitest/mocker@3.2.7",
+        ". > vitest@3.2.7 > @vitest/mocker@3.2.7"
+      ]
+    },
+    {
+      "module_name": "extract-zip",
+      "severity": "high",
+      "title": "extract-zip allows arbitrary file writes through symlink archive entries",
+      "url": "https://github.com/advisories/GHSA-7pqw-9j4j-h8q3",
+      "vulnerable_versions": "<=2.0.1",
+      "patched_versions": "<0.0.0",
+      "installed": ["2.0.1"],
+      "paths": [
+        "packages/playground > lighthouse@12.8.2 > puppeteer-core@24.43.1 > @puppeteer/browsers@2.13.2 > extract-zip@2.0.1"
+      ]
+    },
+    {
+      "module_name": "basic-ftp",
+      "severity": "high",
+      "title": "basic-ftp: Quadratic-time CPU denial of service in Client.list() Unix directory-listing parser (RE_LINE backtracking)",
+      "url": "https://github.com/advisories/GHSA-c475-qrg2-pj4r",
+      "vulnerable_versions": "<=6.2.0",
+      "patched_versions": ">=6.2.1",
+      "installed": ["5.3.1"],
+      "paths": [
+        "packages/playground > lighthouse@12.8.2 > puppeteer-core@24.43.1 > @puppeteer/browsers@2.13.2 > proxy-agent@6.5.0 > pac-proxy-agent@7.2.0 > get-uri@6.0.5 > basic-ftp@5.3.1"
+      ]
+    },
+    {
+      "module_name": "@opentelemetry/instrumentation-pg",
+      "severity": "moderate",
+      "title": "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute",
+      "url": "https://github.com/advisories/GHSA-qqmp-wf37-98f9",
+      "vulnerable_versions": "<0.73.0",
+      "patched_versions": ">=0.73.0",
+      "installed": ["0.51.1"],
+      "paths": [
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-pg@0.51.1"
+      ]
+    },
+    {
+      "module_name": "@opentelemetry/instrumentation-mysql2",
+      "severity": "moderate",
+      "title": "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute",
+      "url": "https://github.com/advisories/GHSA-qqmp-wf37-98f9",
+      "vulnerable_versions": "<0.67.0",
+      "patched_versions": ">=0.67.0",
+      "installed": ["0.45.2"],
+      "paths": [
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-mysql2@0.45.2"
+      ]
+    },
+    {
+      "module_name": "@opentelemetry/instrumentation-knex",
+      "severity": "moderate",
+      "title": "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute",
+      "url": "https://github.com/advisories/GHSA-qqmp-wf37-98f9",
+      "vulnerable_versions": "<0.65.0",
+      "patched_versions": ">=0.65.0",
+      "installed": ["0.44.1"],
+      "paths": [
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-knex@0.44.1"
+      ]
+    },
+    {
+      "module_name": "@opentelemetry/instrumentation-mysql",
+      "severity": "moderate",
+      "title": "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute",
+      "url": "https://github.com/advisories/GHSA-qqmp-wf37-98f9",
+      "vulnerable_versions": "<0.67.0",
+      "patched_versions": ">=0.67.0",
+      "installed": ["0.45.1"],
+      "paths": [
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-mysql@0.45.1"
+      ]
+    },
+    {
+      "module_name": "@opentelemetry/instrumentation-mongoose",
+      "severity": "moderate",
+      "title": "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute",
+      "url": "https://github.com/advisories/GHSA-qqmp-wf37-98f9",
+      "vulnerable_versions": "<0.67.0",
+      "patched_versions": ">=0.67.0",
+      "installed": ["0.46.1"],
+      "paths": [
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-mongoose@0.46.1"
+      ]
+    },
+    {
+      "module_name": "@opentelemetry/instrumentation-tedious",
+      "severity": "moderate",
+      "title": "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute",
+      "url": "https://github.com/advisories/GHSA-qqmp-wf37-98f9",
+      "vulnerable_versions": "<0.40.0",
+      "patched_versions": ">=0.40.0",
+      "installed": ["0.18.1"],
+      "paths": [
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > @opentelemetry/instrumentation-tedious@0.18.1"
+      ]
+    },
+    {
+      "module_name": "tinypool",
+      "severity": "critical",
+      "title": "Tinypool: Prototype Pollution gadget in worker options leads to Remote Code Execution",
+      "url": "https://github.com/advisories/GHSA-5gmw-xhrv-c9v3",
+      "vulnerable_versions": "<=2.1.0",
+      "patched_versions": ">=2.1.1",
+      "installed": ["1.1.1"],
+      "paths": [
+        ". > @vitest/coverage-v8@3.2.7 > vitest@3.2.7 > tinypool@1.1.1",
+        ". > vitest@3.2.7 > tinypool@1.1.1"
+      ]
+    },
+    {
+      "module_name": "tinypool",
+      "severity": "critical",
+      "title": "Tinypool: Prototype Pollution Gadget to RCE in run() options",
+      "url": "https://github.com/advisories/GHSA-85c8-ppgw-ccpr",
+      "vulnerable_versions": "<2.1.2",
+      "patched_versions": ">=2.1.2",
+      "installed": ["1.1.1"],
+      "paths": [
+        ". > @vitest/coverage-v8@3.2.7 > vitest@3.2.7 > tinypool@1.1.1",
+        ". > vitest@3.2.7 > tinypool@1.1.1"
+      ]
+    },
+    {
+      "module_name": "@vitest/mocker",
+      "severity": "moderate",
+      "title": "Vitest: Code injection via unauthenticated manual mock registration",
+      "url": "https://github.com/advisories/GHSA-qxg6-89mg-rqv8",
+      "vulnerable_versions": ">=2.1.0-beta.7 <4.1.12",
+      "patched_versions": ">=4.1.12",
+      "installed": ["3.2.7"],
+      "paths": [
+        ". > @vitest/coverage-v8@3.2.7 > vitest@3.2.7 > @vitest/mocker@3.2.7",
+        ". > vitest@3.2.7 > @vitest/mocker@3.2.7"
+      ]
+    },
+    {
+      "module_name": "zod",
+      "severity": "high",
+      "title": "Zod can exhaust memory while validating oversized constrained collections",
+      "url": "https://github.com/advisories/GHSA-mrhx-c7xc-m3w5",
+      "vulnerable_versions": "<4.6.6",
+      "patched_versions": ">=4.6.6",
+      "installed": ["3.25.76"],
+      "paths": [
+        "packages/cli > @secmentor/core@link:../core > zod@3.25.76",
+        "packages/cli > zod@3.25.76",
+        "packages/core > zod@3.25.76",
+        "packages/playground > @secmentor/core@link:../core > zod@3.25.76",
+        "packages/playground > lighthouse@12.8.2 > puppeteer-core@24.43.1 > chromium-bidi@14.0.0 > zod@3.25.76",
+        "packages/playground > zod@3.25.76",
+        "packages/vscode > @secmentor/core@link:../core > zod@3.25.76"
+      ]
+    },
+    {
+      "module_name": "deepmerge",
+      "severity": "low",
+      "title": "deepmerge mergeObject() allows prototype poisoning of returned objects",
+      "url": "https://github.com/advisories/GHSA-gcqx-w48m-w2h4",
+      "vulnerable_versions": ">=4.2.0 <=4.3.1",
+      "patched_versions": "<0.0.0",
+      "installed": ["4.3.1"],
+      "paths": [
+        "packages/playground > vite-plugin-pwa@0.21.2 > workbox-build@7.4.1 > @rollup/plugin-node-resolve@16.0.3 > deepmerge@4.3.1"
+      ]
+    },
+    {
+      "module_name": "minimatch",
+      "severity": "moderate",
+      "title": "minimatch has potential denial of service via globparts amplification",
+      "url": "https://github.com/advisories/GHSA-g3hv-75wg-m249",
+      "vulnerable_versions": "<11.0.1",
+      "patched_versions": ">=11.0.1",
+      "installed": ["10.2.6", "3.1.5", "5.1.9", "9.0.9"],
+      "paths": [
+        ". > @vitest/coverage-v8@3.2.7 > test-exclude@7.0.2 > glob@10.5.0 > minimatch@9.0.9",
+        ". > @vitest/coverage-v8@3.2.7 > test-exclude@7.0.2 > minimatch@10.2.6",
+        ". > eslint@9.39.5 > @eslint/config-array@0.21.2 > minimatch@3.1.5",
+        ". > eslint@9.39.5 > @eslint/eslintrc@3.3.7 > minimatch@3.1.5",
+        ". > eslint@9.39.5 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/parser@8.72.1 > @typescript-eslint/typescript-estree@8.72.1 > minimatch@10.2.6",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/parser@8.72.1 > eslint@9.39.5 > @eslint/config-array@0.21.2 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/parser@8.72.1 > eslint@9.39.5 > @eslint/eslintrc@3.3.7 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/parser@8.72.1 > eslint@9.39.5 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/type-utils@8.72.1 > @typescript-eslint/typescript-estree@8.72.1 > minimatch@10.2.6",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/type-utils@8.72.1 > @typescript-eslint/utils@8.72.1 > @typescript-eslint/typescript-estree@8.72.1 > minimatch@10.2.6",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/type-utils@8.72.1 > @typescript-eslint/utils@8.72.1 > eslint@9.39.5 > @eslint/config-array@0.21.2 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/type-utils@8.72.1 > @typescript-eslint/utils@8.72.1 > eslint@9.39.5 > @eslint/eslintrc@3.3.7 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/type-utils@8.72.1 > @typescript-eslint/utils@8.72.1 > eslint@9.39.5 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/type-utils@8.72.1 > eslint@9.39.5 > @eslint/config-array@0.21.2 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/type-utils@8.72.1 > eslint@9.39.5 > @eslint/eslintrc@3.3.7 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/type-utils@8.72.1 > eslint@9.39.5 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/utils@8.72.1 > @typescript-eslint/typescript-estree@8.72.1 > minimatch@10.2.6",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/utils@8.72.1 > eslint@9.39.5 > @eslint/config-array@0.21.2 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/utils@8.72.1 > eslint@9.39.5 > @eslint/eslintrc@3.3.7 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > @typescript-eslint/utils@8.72.1 > eslint@9.39.5 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > eslint@9.39.5 > @eslint/config-array@0.21.2 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > eslint@9.39.5 > @eslint/eslintrc@3.3.7 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/eslint-plugin@8.72.1 > eslint@9.39.5 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/parser@8.72.1 > @typescript-eslint/typescript-estree@8.72.1 > minimatch@10.2.6",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/parser@8.72.1 > eslint@9.39.5 > @eslint/config-array@0.21.2 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/parser@8.72.1 > eslint@9.39.5 > @eslint/eslintrc@3.3.7 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/parser@8.72.1 > eslint@9.39.5 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/typescript-estree@8.72.1 > minimatch@10.2.6",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/utils@8.72.1 > @typescript-eslint/typescript-estree@8.72.1 > minimatch@10.2.6",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/utils@8.72.1 > eslint@9.39.5 > @eslint/config-array@0.21.2 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/utils@8.72.1 > eslint@9.39.5 > @eslint/eslintrc@3.3.7 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > @typescript-eslint/utils@8.72.1 > eslint@9.39.5 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > eslint@9.39.5 > @eslint/config-array@0.21.2 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > eslint@9.39.5 > @eslint/eslintrc@3.3.7 > minimatch@3.1.5",
+        ". > typescript-eslint@8.72.1 > eslint@9.39.5 > minimatch@3.1.5",
+        "packages/playground > lighthouse@12.8.2 > @sentry/node@9.47.2 > minimatch@9.0.9",
+        "packages/playground > vite-plugin-pwa@0.21.2 > workbox-build@7.4.1 > @trickfilm400/rollup-plugin-off-main-thread@3.0.0-pre1 > ejs@3.1.10 > jake@10.9.4 > filelist@1.0.6 > minimatch@5.1.9",
+        "packages/playground > vite-plugin-pwa@0.21.2 > workbox-build@7.4.1 > glob@11.1.0 > minimatch@10.2.6",
+        "packages/vscode > @vscode/vsce@3.9.2 > glob@13.0.6 > minimatch@10.2.6",
+        "packages/vscode > @vscode/vsce@3.9.2 > minimatch@10.2.6"
+      ]
+    },
+    {
+      "module_name": "glob",
+      "severity": "moderate",
+      "title": "Glob: AbortSignal cancellation bypass allows post-timeout filesystem traversal",
+      "url": "https://github.com/advisories/GHSA-3g3m-2fjr-6pw4",
+      "vulnerable_versions": ">=9.0.0 <=14.0.1",
+      "patched_versions": ">=14.0.2",
+      "installed": ["10.5.0", "11.1.0", "13.0.6"],
+      "paths": [
+        ". > @vitest/coverage-v8@3.2.7 > test-exclude@7.0.2 > glob@10.5.0",
+        "packages/playground > vite-plugin-pwa@0.21.2 > workbox-build@7.4.1 > glob@11.1.0",
+        "packages/vscode > @vscode/vsce@3.9.2 > glob@13.0.6"
+      ]
+    }
+  ]
+}

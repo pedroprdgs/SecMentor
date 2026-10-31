@@ -122,7 +122,7 @@ Sem pnpm global, a demo já instalada também inicia com:
 node packages/playground/node_modules/vite/bin/vite.js packages/playground --host 127.0.0.1
 ```
 
-[Capturas reais Playwright](docs/screenshots/README.md) · [Métricas e Lighthouse](docs/hackathon/METRICAS.md). Para Pages, o workflow usa `VITE_BASE_PATH=/<nome-do-repositorio>/`, manifest com escopo correspondente e `404.html` para recuperar rotas da SPA. Metadados por rota são atualizados no navegador; crawlers que não executam JavaScript recebem os metadados gerais da landing.
+[Capturas reais Playwright](docs/screenshots/README.md) · [Métricas e Lighthouse](docs/hackathon/METRICAS.md). Para Pages, o workflow usa `VITE_BASE_PATH=/<nome-do-repositorio>/`, manifest com escopo correspondente entradas HTML para cada rota conhecida e `404.html` para recuperar caminhos desconhecidos. Metadados por rota são atualizados no navegador; crawlers que não executam JavaScript recebem os metadados gerais da landing.
 
 ## Arquitetura
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## Não lançado · revisão de QA
+
+- Correções de fetch no navegador, importação com limites cumulativos e erros de ZIP em português.
+- Entradas HTML por rota para atualizar o Pages sem HTTP 404, h1 nas lições e diff atualizado.
+- Quiz CLI preserva respostas em lote e trata fim da entrada com mensagem amigável.
+- Bateria de release, métricas recalculadas, audit documentado e checklist com vídeo local de contingência.
+- Publicação e tag v1.0.0 dependem de confirmação.
+
 ## Não lançado · evolução do front end
 
 - Playground evoluído para aplicação React 18 com rotas, CodeMirror 6 e análise em Worker.
@@ -20,4 +28,4 @@
 - Action composta, resumo/comentário de PR, upload SARIF, Pages e hook opcional.
 - Material do hackathon, contribuição e tarefas para iniciantes.
 
-Limites: heurísticas por arquivo, auto-fix apenas httpOnly, sem release npm/Marketplace ou deploy remoto nesta entrega. Confira `docs/regras.md` e `docs/hackathon/METRICAS.md`.
+Limites: heurísticas por arquivo, auto-fix apenas httpOnly, sem release npm/Marketplace. Pages está disponível; as correções locais de QA ainda precisam ser publicadas. Confira `docs/regras.md` e `docs/hackathon/METRICAS.md`.
