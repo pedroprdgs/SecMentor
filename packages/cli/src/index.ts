@@ -12,6 +12,7 @@ import { createPatch } from 'diff';
 import { z } from 'zod';
 import { scanSource, toJSON, toSARIF, toTerminal, formatLesson, rules, severitySchema, type Lesson } from '@secmentor/core';
 import { scanPath, loadLessons } from '@secmentor/core/node';
+import { providerFromEnv, mentorExplanation, mentorQuiz } from '@secmentor/core/llm';
 import { runQuiz } from './tutor.js';
 
 const program = new Command().name('secmentor').description('Segurança de código que ensina em português. Local, offline, sem IA por padrão.').version('0.1.0').option('--lessons <pasta>', 'Pacote de lições YAML externo');
@@ -40,14 +41,26 @@ program.command('scan').argument('<caminho>').description('Analisa código sem e
   let result;
   try { result = await scanPath(target, { minimumSeverity, ignore: [...settings.ignore, ...ignores.filter(p => !/^SM\d{3}$/.test(p))], ignoreRules: [...settings.ignoreRules, ...ignores.filter(p => /^SM\d{3}$/.test(p))] }); } finally { spinner.stop(); }
   await getLessons(); // Valida um pacote externo mesmo nos formatos de máquina.
-  // LLM_SCAN
+  if (flags.ia) {
+    const provider = providerFromEnv(true, process.env);
+    const lessons = await getLessons();
+    result.explanations = [];
+    for (const id of new Set(result.findings.map(f => f.ruleId))) {
+      const lesson = lessons.find(l => l.id === id)!;
+      result.explanations.push({ ruleId: id, ...await mentorExplanation({ ruleId: id }, lesson, provider) });
+    }
+  }
   const info = await lstat(target);
   const base = relative(process.cwd(), info.isDirectory() ? resolve(target) : dirname(resolve(target))).replaceAll('\\', '/');
   const prefix = base && !base.startsWith('..') && !isAbsolute(base) ? base + '/' : '';
   console.log(flags.json ? toJSON(result) : flags.sarif ? toSARIF(result, prefix) : toTerminal(result, (text, severity) => severity === 'critica' ? chalk.red.bold(text) : severity === 'alta' ? chalk.red(text) : chalk.yellow(text)));
+  if (!flags.json && !flags.sarif) for (const explanation of result.explanations ?? []) console.log(`\n${explanation.ruleId} · ${explanation.source === 'ia' ? 'IA: revise esta explicação' : 'Lição local (IA indisponível)'}\n${explanation.text}`);
   process.exitCode = result.warnings.length ? 2 : result.findings.length ? 1 : 0;
 });
-program.command('explain').argument('<id>').description('Mostra a lição completa.').action(async (id: string) => console.log(formatLesson(await lessonById(id))));
+program.command('explain').argument('<id>').description('Mostra a lição completa.').option('--ia', 'Aprofunda a lição com IA opcional').option('--pergunta <texto>', 'Dúvida sobre a lição; não inclua código nem segredos').action(async (id: string, flags: { ia?: boolean; pergunta?: string }) => {
+  const lesson = await lessonById(id); console.log(formatLesson(lesson));
+  if (flags.ia) { const answer = await mentorExplanation({ ruleId: lesson.id }, lesson, providerFromEnv(true, process.env), flags.pergunta); console.log(`\nFonte: ${answer.source}\n${answer.text}`); }
+});
 program.command('rules').description('Lista regras disponíveis.').action(async () => { const lessons = await getLessons(); for (const rule of rules) console.log(`${rule.id}  ${rule.severity.padEnd(7)}  ${lessons.find(l => l.id === rule.id)?.titulo ?? rule.title}`); });
 program.command('lint-lessons').description('Valida os YAMLs com Zod.').action(async () => {
   const directory = program.opts<{ lessons?: string }>().lessons ?? resolve(dirname(new URL(import.meta.url).pathname), '../../../lessons/pt-BR');
@@ -56,8 +69,9 @@ program.command('lint-lessons').description('Valida os YAMLs com Zod.').action(a
   if (missing.length) throw new Error('Há regras sem lição.');
   console.log(`${loaded.length} lições válidas · schema, referências e quiz conferidos.`);
 });
-program.command('quiz').argument('[id]').description('Tutor interativo com progresso local.').action(async (id?: string) => {
+program.command('quiz').argument('[id]').description('Tutor interativo com progresso local.').option('--ia', 'Gera perguntas com IA; usa lições locais em caso de falha').action(async (id: string | undefined, flags: { ia?: boolean }) => {
   const selected = id ? [await lessonById(id)] : await getLessons();
+  if (flags.ia) { const provider = providerFromEnv(true, process.env); for (const lesson of selected) lesson.quiz = await mentorQuiz(lesson, provider); }
   await interactive(ask => runQuiz(selected, ask, text => console.log(text)));
 });
 program.command('fix').argument('<arquivo>').description('Mostra diff e pede confirmação antes de aplicar uma correção segura.').action(async (file: string) => {

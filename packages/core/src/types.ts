@@ -21,5 +21,5 @@ export interface Finding {
   message: string; snippet: string; lessonId: string; fix?: Fix;
 }
 export interface ScanWarning { file: string; message: string }
-export interface ScanResult { findings: Finding[]; warnings: ScanWarning[]; filesScanned: number; durationMs: number }
+export interface ScanResult { explanations?: { ruleId: string; text: string; source: 'ia' | 'licao' }[]; findings: Finding[]; warnings: ScanWarning[]; filesScanned: number; durationMs: number }
 export interface SourceFile { path: string; content: string; tracked?: boolean; envIgnored?: boolean }
