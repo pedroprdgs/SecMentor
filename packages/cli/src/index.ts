@@ -235,7 +235,7 @@ program
         'Lições compiladas desatualizadas. Execute pnpm lessons:compile e pnpm build.',
       );
     console.log(
-      `${loaded.length} lições válidas · schema, referências e quiz conferidos.`,
+      `${loaded.length} ${loaded.length === 1 ? 'lição válida' : 'lições válidas'} · schema, referências e quiz conferidos.`,
     );
   });
 program
