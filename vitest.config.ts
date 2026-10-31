@@ -1,7 +1,25 @@
 import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
-    include: ['packages/**/*.test.ts'],
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'node',
+          include: ['packages/core/**/*.test.ts', 'packages/cli/**/*.test.ts'],
+          environment: 'node',
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'web',
+          include: ['packages/playground/src/**/*.test.{ts,tsx}'],
+          environment: 'jsdom',
+          setupFiles: ['packages/playground/test-setup.ts'],
+        },
+      },
+    ],
     coverage: {
       provider: 'v8',
       include: ['packages/core/src/**/*.ts'],

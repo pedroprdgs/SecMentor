@@ -147,3 +147,8 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Browser QA and local performance reports
+**/test-results/
+**/playwright-report/
+.lighthouse/

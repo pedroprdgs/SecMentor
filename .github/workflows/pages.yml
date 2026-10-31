@@ -29,6 +29,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @secmentor/core build
       - run: pnpm --filter @secmentor/playground build
+        env:
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: packages/playground/dist
