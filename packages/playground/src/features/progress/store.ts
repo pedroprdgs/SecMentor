@@ -1,0 +1,14 @@
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { z } from 'zod';
+import { PREFIX, safeStorage } from '../../lib/storage.js';
+import { t } from '../../i18n/index.js';
+export const historySchema=z.object({id:z.string(),date:z.string(),files:z.array(z.string()),findings:z.number().int().nonnegative(),durationMs:z.number().nonnegative()});
+const progressSchema=z.object({points:z.number().nonnegative(),answered:z.number().int().nonnegative(),correct:z.number().int().nonnegative(),correctRun:z.number().int().nonnegative(),completed:z.array(z.string()),wrong:z.array(z.string()),achievements:z.array(z.enum(['first','fixed','ten','all'])),days:z.number().int().nonnegative(),lastDay:z.string(),history:z.array(historySchema).max(20)});
+export type ProgressData=z.infer<typeof progressSchema>;
+export function dayKey(date:Date){return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;}
+export function nextStreak(lastDay:string,days:number,now:Date){const today=dayKey(now);const yesterday=new Date(now);yesterday.setDate(yesterday.getDate()-1);return{lastDay:today,days:lastDay===today?days:lastDay===dayKey(yesterday)?days+1:1};}
+export function level(points:number){return points>=200?t.progress.guardian:points>=80?t.progress.defender:t.progress.beginner;}
+export const emptyProgress:ProgressData={points:0,answered:0,correct:0,correctRun:0,completed:[],wrong:[],achievements:[],days:0,lastDay:'',history:[]};
+interface ProgressState extends ProgressData {recordAnswer:(id:string,correct:boolean,now?:Date)=>void;awardFix:()=>void;recordAnalysis:(files:string[],findings:number,durationMs:number)=>void;reset:()=>void;}
+export const useProgress=create<ProgressState>()(persist((set)=>({...emptyProgress,recordAnswer:(id,correct,now=new Date())=>set(s=>{const completed=correct?[...new Set([...s.completed,id])]:s.completed;const correctRun=correct?s.correctRun+1:0;const achievements=new Set(s.achievements);achievements.add('first');if(correctRun>=10)achievements.add('ten');if(completed.length>=12)achievements.add('all');return{points:s.points+(correct?20:0),answered:s.answered+1,correct:s.correct+(correct?1:0),correctRun,completed,wrong:correct?s.wrong.filter(value=>value!==id):[...new Set([...s.wrong,id])],achievements:[...achievements],...nextStreak(s.lastDay,s.days,now)};}),awardFix:()=>set(s=>({achievements:[...new Set([...s.achievements,'fixed' as const])]})),recordAnalysis:(files,findings,durationMs)=>set(s=>({history:[{id:crypto.randomUUID(),date:new Date().toISOString(),files:files.slice(0,20),findings,durationMs},...s.history].slice(0,20)})),reset:()=>set(emptyProgress)}),{name:PREFIX+'progress',storage:createJSONStorage(()=>safeStorage),merge:(stored,current)=>{const parsed=progressSchema.safeParse(stored);return parsed.success?{...current,...parsed.data}:current;}}));
