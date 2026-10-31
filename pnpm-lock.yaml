@@ -51,8 +51,8 @@ importers:
         specifier: ^12.1.0
         version: 12.1.0
       diff:
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^8.0.4
+        version: 8.0.4
       ora:
         specifier: ^8.2.0
         version: 8.2.0
@@ -115,8 +115,8 @@ importers:
         specifier: ^6.0.1
         version: 6.0.2
       diff:
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^8.0.4
+        version: 8.0.4
       framer-motion:
         specifier: ^12.6.2
         version: 12.43.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2656,8 +2656,8 @@ packages:
   devtools-protocol@0.0.1608973:
     resolution: {integrity: sha512-Tpm17fxYzt+J7VrGdc1k8YdRqS3YV7se/M6KeemEqvUbq/n7At1rWVuXMxQgpWkdwSdIEKYbU//Bve+Shm4YNQ==}
 
-  diff@7.0.0:
-    resolution: {integrity: sha512-PJWHUb1RFevKCwaFA9RlG5tCd+FO5iRh9A8HEtkmBH2Li03iJriB6m6JIN4rGz3K3JLawI7/veA1xzRKP6ISBw==}
+  diff@8.0.4:
+    resolution: {integrity: sha512-DPi0FmjiSU5EvQV0++GFDOJ9ASQUVFh5kD+OzOnYdi7n3Wpm9hWWGfB/O2blfHcMVTL5WkQXSnRiK9makhrcnw==}
     engines: {node: '>=0.3.1'}
 
   dom-accessibility-api@0.5.16:
@@ -7722,7 +7722,7 @@ snapshots:
 
   devtools-protocol@0.0.1608973: {}
 
-  diff@7.0.0: {}
+  diff@8.0.4: {}
 
   dom-accessibility-api@0.5.16: {}
 
