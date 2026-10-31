@@ -2,14 +2,32 @@ import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
-import { readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { lessons } from '@secmentor/core/content';
 function spaFallback(base: string): Plugin {
   return {
     name: 'secmentor-spa-pages',
     async closeBundle() {
       const dist = resolve(import.meta.dirname, 'dist');
       const index = await readFile(resolve(dist, 'index.html'), 'utf8');
+      // Pages precisa de um arquivo por rota para responder HTTP 200 no primeiro F5.
+      const routes = [
+        'analisar',
+        'licoes',
+        'quiz',
+        'progresso',
+        'contribuir',
+        'configuracoes',
+        'sobre',
+        'demo',
+        ...lessons.map((lesson) => `licoes/${lesson.id}`),
+      ];
+      for (const route of routes) {
+        const directory = resolve(dist, route);
+        await mkdir(directory, { recursive: true });
+        await writeFile(resolve(directory, 'index.html'), index);
+      }
       await writeFile(
         resolve(dist, '404.html'),
         index.replace(

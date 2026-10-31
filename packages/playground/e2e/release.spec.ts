@@ -249,6 +249,11 @@ test('release: todas as lições, layouts, teclado e console', async ({
     '/sobre',
     ...lessons.map((lesson) => `/licoes/${lesson.id}`),
   ];
+  for (const route of routes) {
+    expect(
+      await readFile(resolve('dist', route.slice(1), 'index.html'), 'utf8'),
+    ).toContain('<div id="root">');
+  }
   for (const width of [360, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of routes) {
